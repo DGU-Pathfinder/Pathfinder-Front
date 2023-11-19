@@ -4,7 +4,7 @@ import "./AppFooter.scss";
 function AppFooter() {
     return (
         <div className="AppFooter">
-            AppFooter
+            Pathfinder ©2023 Created by Dongguk Univ. department of ICE
         </div>
 
     )
