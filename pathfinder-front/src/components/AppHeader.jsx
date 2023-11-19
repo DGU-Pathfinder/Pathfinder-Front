@@ -12,7 +12,7 @@ const menuItems = [
       </a>
     ),
     key: 'rt-image',
-    icon: <PictureOutlined style={{ fontSize: '24px' }} />,
+    icon: <PictureOutlined style={{ fontSize: '20px' }} />,
   },
   {
     label: (
@@ -21,7 +21,7 @@ const menuItems = [
       </a>
     ),
     key: 'ai-detection',
-    icon: <AimOutlined style={{ fontSize: '24px' }} />,
+    icon: <AimOutlined style={{ fontSize: '20px' }} />,
   },
   {
     label: (
@@ -30,7 +30,7 @@ const menuItems = [
       </a>
     ),
     key: 'evaluation',
-    icon: <UserOutlined style={{ fontSize: '24px' }} />,
+    icon: <UserOutlined style={{ fontSize: '20px' }} />,
   },
 ];
 
@@ -44,7 +44,7 @@ function createItemsFromMenu(menuItem) {
 
 
 function AppHeader() {
-  const itemStyle = { marginRight: '110px' };
+  const itemStyle = { marginRight: '10px' };
   return (
     <Header
       className="main-header"
@@ -58,8 +58,10 @@ function AppHeader() {
         display: 'flex',
         alignItems: 'center',
       }}>
-      <div className="demo-logo" />
-      <h1 className="site-name" style={{ color: '#F37321' }}>Pathfinder</h1>
+      <div className="logo-site-name">
+        <div className="demo-logo" />
+        <h1 className="site-name" style={{ color: '#F37321' }}>Pathfinder</h1>
+      </div>
       <Menu
         theme="dark"
         className="menu-buttons"
@@ -71,7 +73,7 @@ function AppHeader() {
         }))}
         style={{
           backgroundColor: '#2C2C2C',
-          height: '32x',
+          height: '32px',
           width: '40%',
 
         }}
