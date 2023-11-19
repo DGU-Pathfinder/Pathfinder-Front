@@ -8,8 +8,9 @@ module.exports = {
                 lessLoaderOptions: {
                     lessOptions: {
                         modifyVars: {
-                            '@btn-link-hover-bg': '#F37321',
-                            '@btn-link-hover-color': '#F37321',
+                            '@item-selected-color': '#F37321',
+                            'menu-item-active-bg': '#F37321',
+                            'menu-item-color': '#F37321',
                         },
                         javascriptEnabled: true,
                     },
