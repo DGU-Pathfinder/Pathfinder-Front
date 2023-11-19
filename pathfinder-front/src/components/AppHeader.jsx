@@ -1,7 +1,47 @@
 import React from "react";
 import "./AppHeader.scss";
-import { Layout , Menu } from "antd";
+import { Layout , Menu, Button } from "antd";
+import { PictureOutlined, AimOutlined, UserOutlined } from '@ant-design/icons';
 const { Header } = Layout;
+
+const menuItems = [
+    {
+      label: (
+        <a href="/">
+          탐지 결과
+        </a>
+      ),
+      key: 'rt-image',
+      icon: <PictureOutlined />,
+    },
+    {
+      label: (
+        <a href="/ai-detection">
+          AI 탐지
+        </a>
+      ),
+      key: 'ai-detection',
+      icon: <AimOutlined />,
+    },
+    {
+      label: (
+        <a href="/evaluation">
+          평가한 항목
+        </a>
+      ),
+      key: 'evaluation',
+      icon: <UserOutlined />,
+    },
+  ];
+
+function createItemsFromMenu(menuItem) {
+    return menuItem.map((item) => ({
+        key: item.key,
+        label: item.label,
+        icon: item.icon,
+    }));
+}
+  
 
 function AppHeader() {
     return (
@@ -12,21 +52,27 @@ function AppHeader() {
           top: 0,
           zIndex: 1,
           width: '100%',
+          justifyContent: 'center',
           display: 'flex',
           alignItems: 'center',
       }}>
-        <div className="header-logo" />
+        <div className="demo-logo" />
+        <h1 className="site-name" style={{ color: '#F37321'}}>Pathfinder</h1>
         <Menu
-          theme="dark"
+        //   theme="dark"
+          className="menu-buttons"
           mode="horizontal"
           defaultSelectedKeys={['1']}
-          items={new Array(3).fill(null).map((_, index) => ({
-            key: String(index + 1),
-            label: `nav ${index + 1}`,
-          }))}
+          items={createItemsFromMenu(menuItems)}
+          style={{
+            backgroundColor: '#2C2C2C',
+            height: '32x',
+            width: '40%',
+            
+          }}
       />
+        <Button className="logout-button" type="link">LOGOUT</Button>
       </Header>
-
     )
 }
 
