@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 import RtImage from "RtImage"
-import { Pagination } from "antd";
+import { Col, Row, Pagination } from "antd";
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
@@ -19,18 +19,22 @@ function RtImageList() {
                 console.log(error);
             });
 
-        console.log("mounted 123131");
+        console.log("mounted RtImageList.");
     }, []);
 
     return (
-        <div>
-            <h2>RT Image List</h2>
-            {rtImageList.map(rtImage => (
-                <RtImage rtImage={rtImage} key={rtImage.pk}/>
-            ))}
+        <div className="rt-images-grid">
+            <h2 style={{ textAlign: "center" }}>RT Image List</h2>
+            <Row gutter={[16, 16]}>
+                {rtImageList.map(rtImage => (
+                    <Col span={12} key={rtImage.pk}>
+                        <RtImage rtImage={rtImage} />
+                    </Col>
+                ))}
+            </Row>
         </div>
     );
-    
+
 }
 
 export default RtImageList;
