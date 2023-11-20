@@ -27,7 +27,7 @@ function RtImageList() {
         <div className="rt-images-grid">
             {/* <h2 style={{ textAlign: "center" }}>RT Image List</h2> */}
             <Row gutter={[16, 16]}
-            // style={{ rowGap: "0px" }}
+            // style={{rowGap: "0px"}}
             >
                 {rtImageList.map(rtImage => (
                     <Col className="each-grid" span={12} key={rtImage.pk}>
