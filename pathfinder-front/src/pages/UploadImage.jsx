@@ -57,7 +57,11 @@ const UploadImage = () => (
                 </p>
                 <p
                     className="ant-upload-text"
-                    style={{color: "white"}}
+                    style={{
+                        color: "white",
+                        
+                
+                }}
                 >
                     Click or drag RT images to this area to upload
                 </p>
