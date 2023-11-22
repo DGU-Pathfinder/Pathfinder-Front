@@ -1,12 +1,15 @@
 import React from "react";
 import AppHeader from "./AppHeader";
 import AppFooter from "./AppFooter";
+import "./AppLayout.scss"
 
 function AppLayout({ children }) {
     return (
         <>
             <AppHeader />
-            {children}
+            <body>
+                {children}
+            </body>
             <AppFooter />
         </>
 
