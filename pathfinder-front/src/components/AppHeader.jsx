@@ -16,7 +16,7 @@ const menuItems = [
   },
   {
     label: (
-      <a href="/ai-detection">
+      <a href="/upload-image">
         AI 탐지
       </a>
     ),
@@ -75,10 +75,10 @@ function AppHeader() {
           backgroundColor: '#2C2C2C',
           height: '32px',
           width: '40%',
-
         }}
       />
-      <Button className="logout-button" type="link">LOGOUT</Button>
+      <Button className="logout-button" type="link">
+        LOGOUT</Button>
     </Header>
   )
 }
