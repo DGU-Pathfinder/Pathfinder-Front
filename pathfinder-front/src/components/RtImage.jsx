@@ -26,7 +26,7 @@ const columns = [
     },
 ];
 
-function makeDataForTable(data_set, name) {
+function makeDataForTable(data_set, name, analyzer) {
     let data = [];
     let slag_cnt = 0;
     let porosity_cnt = 0;
@@ -44,7 +44,7 @@ function makeDataForTable(data_set, name) {
             others_cnt += 1;
     }
     data = {
-        Analyzer: name,
+        Analyzer: analyzer,
         slag: slag_cnt,
         porosity: porosity_cnt,
         others: others_cnt,
@@ -54,7 +54,8 @@ function makeDataForTable(data_set, name) {
 
 function RtImage({ rtImage }) {
     const { image, image_name, ai_model_set, expert } = rtImage;
-    const { slag, porosity, others } = makeDataForTable(ai_model_set, "ai_defect_set");
+    const ai_model_data = makeDataForTable(ai_model_set, "ai_defect_set", "AI");
+    // const expert_data = makeDataForTable(expert, "expert_defect_set", "Expert");
 
     return (
         <div className="rt-image">
@@ -71,7 +72,7 @@ function RtImage({ rtImage }) {
             <p style={{
                 marginTop: "0.5%",
                 marginBottom: "1%",
-                font: "bold",
+                fontWeight: "bold",
             }}>
                 {image_name}</p>
 
@@ -88,7 +89,7 @@ function RtImage({ rtImage }) {
             >
                 <Table id="table-fixed-height"
                     columns={columns}
-                    dataSource={[slag, porosity, others]}
+                    dataSource={[ai_model_data]}
                     pagination={false}
                     bordered
                     style={{
