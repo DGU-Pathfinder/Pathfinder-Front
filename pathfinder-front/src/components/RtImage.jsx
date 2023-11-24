@@ -26,6 +26,14 @@ const columns = [
     },
 ];
 
+const expert_data = {
+    key: '2',
+    Analyzer: "Expert",
+    slag: 9,
+    porosity: 9,
+    others: 6,
+};
+
 function makeDataForTable(data_set, name, analyzer) {
     let data = [];
     let slag_cnt = 0;
@@ -44,6 +52,7 @@ function makeDataForTable(data_set, name, analyzer) {
             others_cnt += 1;
     }
     data = {
+        key: '1',
         Analyzer: analyzer,
         slag: slag_cnt,
         porosity: porosity_cnt,
@@ -89,12 +98,13 @@ function RtImage({ rtImage }) {
             >
                 <Table id="table-fixed-height"
                     columns={columns}
-                    dataSource={[ai_model_data]}
+                    dataSource={[ai_model_data, expert_data]}
                     pagination={false}
                     bordered
                     style={{
-                        width: "60%",
+                        width: "70%",
                         margin: "auto",
+                        marginBottom: "2%",
                     }}
                     scroll={{ y: 70 }}
                 />
