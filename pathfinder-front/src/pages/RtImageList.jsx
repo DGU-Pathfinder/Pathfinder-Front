@@ -8,6 +8,7 @@ const apiUrl = "http://localhost:8000/api/rt-images/";
 
 function RtImageList() {
     const [rtImageList, setRtImageList] = useState([]);
+    const [data, setData] = useState([]);
 
     useEffect(() => {
         Axios.get(apiUrl)
@@ -15,6 +16,7 @@ function RtImageList() {
                 const { data } = response;
                 console.log("loaded response : ", response);
                 setRtImageList(data.results);
+                setData(data);
             })
             .catch((error) => {
                 console.log(error);
@@ -41,7 +43,7 @@ function RtImageList() {
             <ConfigProvider
                 theme={{
                     token: {
-                        colorText: 'rgb(255, 255, 255)',
+                        colorText: '#909090'
                     },
                 }}
             >
@@ -54,7 +56,7 @@ function RtImageList() {
                         textAlign: "center",
                         margin: "3%",
                     }}
-                    total={71}
+                    total={data.count}
                     showSizeChanger={false}
                 >
                 </Pagination>
