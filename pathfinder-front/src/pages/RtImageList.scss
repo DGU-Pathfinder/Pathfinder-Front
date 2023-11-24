@@ -8,3 +8,24 @@
 .each-grid {
     margin-top: 2%;
 }
+
+.ant-pagination-item-active {
+    background-color: #121212 !important;
+    border-color: rgba(228, 122, 58) !important;
+
+    a {
+        color: rgba(228, 122, 58) !important;
+    }
+}
+
+.ant-pagination-item-ellipsis {
+    color: rgba(255, 255, 255) !important;
+}
+
+.ant-pagination-item-link {
+    color: rgba(255, 255, 255) !important;
+}
+
+.ant-pagination-item-link-icon {
+    color: rgba(255, 255, 255) !important;
+}
