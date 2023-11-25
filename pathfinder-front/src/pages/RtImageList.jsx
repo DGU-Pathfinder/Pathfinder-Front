@@ -30,7 +30,6 @@ function RtImageList() {
         <div className="rt-page">
             <div className="rt-images-grid">
                 <Row
-                    // gutter={[16, 16]}
                     style={{ rowGap: "0px" }}
                 >
                     {rtImageList.map(rtImage => (
