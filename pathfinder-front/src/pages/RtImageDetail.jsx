@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
-import { Button, Col, ConfigProvider, Row } from "antd"
+import { Button, Col, ConfigProvider, Divider, Row } from "antd"
 import RtImageDetailData from "../components/RtImageDetailData"
 import DetailTable from "../components/DetailTable"
+import "./RtImageDetail.scss"
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
@@ -41,12 +42,13 @@ function RtImageDetail() {
             <h1
                 style={{
                     textAlign: "center",
-                    color: "rgba(255, 255, 255)"
+                    color: "rgba(255, 255, 255)",
+                    marginBottom: "0px",
                 }}
             >
                 {rtImage.image_name}
             </h1>
-            <Row>
+            <Row align="middle">
                 <Col span={18}>
                     <div className='rt-image-ai-detail'>
                         <RtImageDetailData key={1} rtImage={rtImage} />
@@ -56,17 +58,39 @@ function RtImageDetail() {
                     <DetailTable defect_set={aiDefects} analyzer={"AI"} />
                 </Col>
             </Row >
-
-            <Row>
+            <div
+                className="rt-image-detail-divider"
+                style={{
+                    marginLeft: "3%",
+                    marginRight: "3%",
+                }}
+            >
+                <Divider
+                    style={{
+                        borderColor: "rgba(228, 112, 58)",
+                        margin: "0px",
+                    }}
+                />
+            </div>
+            <Row align="middle">
                 <Col span={18}>
                     <div className="rt-image-expert-detail">
-                        <RtImageDetailData key={2} rtImage={rtImage} />
+                        <RtImageDetailData
+                            key={2}
+                            rtImage={rtImage}
+                        />
                     </div>
                 </Col>
                 <Col span={6}>
                     <div className="rt-table-expert">
                         <DetailTable defect_set={aiDefects} analyzer={"Expert"} />
-                        <Button>
+                        <Button
+                            style={{
+                                width: "70%",
+                                display: "block",
+                                margin: "auto",
+                                marginTop: "2%",
+                            }}>
                             Click to Edit
                         </Button>
                     </div>
