@@ -1,4 +1,3 @@
-// import { LeftCircleFilled } from "@ant-design/icons";
 import React from "react";
 import { ConfigProvider, Table } from "antd";
 import { useState, useEffect, useRef } from "react";
@@ -27,14 +26,6 @@ const columns = [
     },
 ];
 
-const expert_data = {
-    key: '2',
-    Analyzer: "Expert",
-    slag: 9,
-    porosity: 9,
-    others: 6,
-};
-
 function makeDataForTable(data_set, name, analyzer) {
     let data = [];
     let slag_cnt = 0;
@@ -43,6 +34,14 @@ function makeDataForTable(data_set, name, analyzer) {
 
     if (data_set === null)
         return 0;
+    else if (data_set === "no expert data")
+        return {
+            key: '1',
+            Analyzer: analyzer,
+            slag: '-',
+            porosity: '-',
+            others: '-',
+        };
     data_set = data_set[0][name];
     for (const value of data_set) {
         if (value["defect_type"] === "slag")
@@ -66,7 +65,7 @@ function RtImage({ rtImage }) {
     const { image, image_name, ai_model_set, expert } = rtImage;
     const defects = rtImage.ai_model_set[0].ai_defect_set;
     const ai_model_data = makeDataForTable(ai_model_set, "ai_defect_set", "AI");
-    // const expert_data = makeDataForTable(expert, "expert_defect_set", "Expert");
+    const expert_data = makeDataForTable(expert?.[0]?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
     const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
     const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
     const imageRef = useRef(null);

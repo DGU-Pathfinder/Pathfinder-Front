@@ -34,7 +34,7 @@ function RtImageDetail() {
     }
 
     const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
-    const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || [];
+    const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
     console.log("aiDefects : ", aiDefects);
 
     return (
@@ -83,7 +83,7 @@ function RtImageDetail() {
                 </Col>
                 <Col span={6}>
                     <div className="rt-table-expert">
-                        <DetailTable defect_set={aiDefects} analyzer={"Expert"} />
+                        <DetailTable defect_set={expertDefects} analyzer={"Expert"} />
                         <ConfigProvider
                             theme={{
                                 components: {

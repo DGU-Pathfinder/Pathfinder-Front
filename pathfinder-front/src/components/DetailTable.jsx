@@ -25,14 +25,6 @@ const columns = [
     },
 ];
 
-const expert_data = {
-    key: '2',
-    Analyzer: "Expert",
-    slag: 9,
-    porosity: 9,
-    others: 6,
-};
-
 function makeDataForTable(data_set, analyzer) {
     let data = [];
     let slag_cnt = 0;
@@ -41,6 +33,14 @@ function makeDataForTable(data_set, analyzer) {
 
     if (data_set === undefined)
         return 0;
+    else if (data_set === "no expert data")
+        return {
+            key: '1',
+            Analyzer: analyzer,
+            slag: '-',
+            porosity: '-',
+            others: '-',
+        };
     console.log("data_set : ", data_set);
     for (const value of data_set) {
         if (value["defect_type"] === "slag")
