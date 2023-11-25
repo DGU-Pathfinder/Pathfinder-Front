@@ -1,6 +1,7 @@
 import React from "react";
 // import { ConfigProvider, Table, Text } from "antd";
 import { useState, useEffect, useRef } from "react";
+import "./RtImageDetailData.scss";
 
 function RtImageDetailData({ rtImage }) {
     const { image, image_name } = rtImage;
@@ -48,7 +49,7 @@ function RtImageDetailData({ rtImage }) {
     };
 
     return (
-        <div className="rt-image">
+        <div className="rt-image-detail">
             <div style={{ position: 'relative' }}>
                 <img
                     className="small-image"
@@ -58,7 +59,8 @@ function RtImageDetailData({ rtImage }) {
                     style={{
                         width: "100%",
                         border: "3px solid white",
-                        marginTop: "2%",
+                        // marginTop: "2%",
+                        margin: "2%",
                     }}
                 />
                 {defects.map((box, index) => {
