@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Axios from "axios";
 import RtImage from "../components/RtImage"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
@@ -30,11 +31,17 @@ function RtImageList() {
             <div className="rt-images-grid">
                 {/* <h2 style={{ textAlign: "center" }}>RT Image List</h2> */}
                 <Row gutter={[16, 16]}
-                // style={{rowGap: "0px"}}
+                    style={{ rowGap: "0px" }}
                 >
                     {rtImageList.map(rtImage => (
                         <Col className="each-grid" span={12} key={rtImage.pk}>
-                            <RtImage rtImage={rtImage} />
+                            <Link
+                                key={rtImage.pk}
+                                to={`/rt-image/${rtImage.pk}`}
+                                style={{ color: "white" }}
+                            >
+                                <RtImage rtImage={rtImage} />
+                            </Link>
                         </Col>
                     ))}
                 </Row>
