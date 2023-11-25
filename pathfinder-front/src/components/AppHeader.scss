@@ -19,7 +19,6 @@
         margin-right: 2.5%;
     }
 
-
     .menu-buttons {
         display: flex;
         align-items: center;
@@ -29,10 +28,6 @@
 
     .ant-menu-item:hover {
         color: #F37321 !important;
-    }
-
-    .ant-menu-item::after {
-        // color: #F37321 !important;
     }
 
     .logout-button {

@@ -29,7 +29,6 @@ function RtImageList() {
     return (
         <div className="rt-page">
             <div className="rt-images-grid">
-                {/* <h2 style={{ textAlign: "center" }}>RT Image List</h2> */}
                 <Row gutter={[16, 16]}
                     style={{ rowGap: "0px" }}
                 >
@@ -45,8 +44,8 @@ function RtImageList() {
                         </Col>
                     ))}
                 </Row>
-
             </div>
+
             <ConfigProvider
                 theme={{
                     token: {

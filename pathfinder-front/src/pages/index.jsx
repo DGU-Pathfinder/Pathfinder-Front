@@ -1,6 +1,5 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom";
-import { ConfigProvider } from "antd";
 import AppLayout from "../components/AppLayout";
 import UserRegister from "./accounts/UserRegister";
 import UserLogin from "./accounts/UserLogin";

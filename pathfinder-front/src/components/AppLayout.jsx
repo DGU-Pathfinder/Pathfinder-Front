@@ -12,7 +12,6 @@ function AppLayout({ children }) {
             </body>
             <AppFooter />
         </>
-
     )
 }
 
