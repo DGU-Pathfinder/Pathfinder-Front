@@ -83,7 +83,6 @@ function DetailTable(props) {
                 style={{
                     width: "70%",
                     margin: "auto",
-                    marginBottom: "2%",
                 }}
                 scroll={{ y: 70 }}
             />
