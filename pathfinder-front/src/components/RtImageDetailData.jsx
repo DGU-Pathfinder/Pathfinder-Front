@@ -54,7 +54,7 @@ function RtImageDetailData({ rtImage }) {
                     style={{
                         width: "100%",
                         border: "3px solid white",
-                        margin: "2%",
+                        // margin: "2%",
                     }}
                 />
                 {defects.map((box, index) => {
@@ -67,7 +67,7 @@ function RtImageDetailData({ rtImage }) {
                             width: adjustedBox.width,
                             height: adjustedBox.height,
                             border: '2px solid red',
-                            margin: "2%",
+                            // margin: "2%",
                         }} />
                     );
                 })}
