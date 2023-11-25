@@ -34,7 +34,7 @@ function RtImageDetail() {
     }
 
     const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
-    const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || [];
+    const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
     console.log("aiDefects : ", aiDefects);
 
     return (
@@ -67,7 +67,7 @@ function RtImageDetail() {
             >
                 <Divider
                     style={{
-                        borderColor: "rgba(228, 112, 58)",
+                        borderColor: "rgba(255, 255, 255)",
                         margin: "0px",
                     }}
                 />
@@ -83,16 +83,29 @@ function RtImageDetail() {
                 </Col>
                 <Col span={6}>
                     <div className="rt-table-expert">
-                        <DetailTable defect_set={aiDefects} analyzer={"Expert"} />
-                        <Button
-                            style={{
-                                width: "70%",
-                                display: "block",
-                                margin: "auto",
-                                marginTop: "2%",
-                            }}>
-                            Click to Edit
-                        </Button>
+                        <DetailTable defect_set={expertDefects} analyzer={"Expert"} />
+                        <ConfigProvider
+                            theme={{
+                                components: {
+                                    Button: {
+                                        defaultBg: "#121212",
+                                        defaultBorderColor: "rgba(255, 255, 255)",
+                                        defaultColor: "rgba(255, 255, 255)",
+                                    }
+
+                                }
+                            }}
+                        >
+                            <Button className="rt-image-edit-button"
+                                style={{
+                                    width: "70%",
+                                    display: "block",
+                                    margin: "auto",
+                                    marginTop: "2%",
+                                }}>
+                                Click to Edit
+                            </Button>
+                        </ConfigProvider>
                     </div>
                 </Col>
             </Row>
