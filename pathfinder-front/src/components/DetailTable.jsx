@@ -1,8 +1,6 @@
-// import { LeftCircleFilled } from "@ant-design/icons";
 import React from "react";
 import { ConfigProvider, Table, Text } from "antd";
 import { useState, useEffect, useRef } from "react";
-// import "./RtImage.scss";
 
 const columns = [
     {
@@ -43,7 +41,6 @@ function makeDataForTable(data_set, analyzer) {
 
     if (data_set === undefined)
         return 0;
-    // data_set = data_set[0][name];
     console.log("data_set : ", data_set);
     for (const value of data_set) {
         if (value["defect_type"] === "slag")
@@ -64,11 +61,7 @@ function makeDataForTable(data_set, analyzer) {
 }
 
 function DetailTable(props) {
-    // const { image, image_name, ai_model_set, expert } = rtImage;
-    // const defects = rtImage.ai_model_set[0].ai_defect_set;
-    console.log("defect_set : ", props.defect_set);
     const defect_data = makeDataForTable(props.defect_set, props.analyzer);
-    // const expert_data = makeDataForTable(expert, "expert_defect_set", "Expert");
 
     return (
         <ConfigProvider

@@ -3,7 +3,6 @@
     margin-right: 5%;
     border-top: 2.5px solid white;
     border-bottom: 2.5px solid white;
-
 }
 
 .ant-table-thead>tr>th {
@@ -15,25 +14,11 @@
 }
 
 .ant-table-cell {
-    // margin: 0px !important;
     padding-top: 5px !important;
     padding-bottom: 5px !important;
     padding-left: 0px !important;
     padding-right: 0px !important;
-    // height: 100% !important;
 }
-
-// .ant-table-tbody {
-// height: 100% !important;
-// }
-
-// .ant-table-placeholder {
-// height: 100% !important;
-// }
-
-// .ant-table-body {
-// min-height: 50px;
-// }
 
 #table-fixed-height tbody {
     height: 50%;

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
-import { Button, Col, ConfigProvider, Row, Table } from "antd"
+import { Button, Col, ConfigProvider, Row } from "antd"
 import RtImageDetailData from "../components/RtImageDetailData"
 import DetailTable from "../components/DetailTable"
 
@@ -29,7 +29,7 @@ function RtImageDetail() {
     }, []);
 
     if (!rtImage) {
-        return <div>Loading...</div>; // 로딩 중 표시
+        return <div>Loading...</div>;
     }
 
     const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
@@ -49,17 +49,10 @@ function RtImageDetail() {
             <Row>
                 <Col span={18}>
                     <div className='rt-image-ai-detail'>
-                        {/* {rtImage && <RtImageDetailData key={1} rtImage={rtImage} />} */}
                         <RtImageDetailData key={1} rtImage={rtImage} />
                     </div>
                 </Col>
                 <Col span={6}>
-                    {/* <Table
-                        style={{
-                            // justifyContent: "center",
-                            // display: "flex",
-                        }}
-                    /> */}
                     <DetailTable defect_set={aiDefects} analyzer={"AI"} />
                 </Col>
             </Row >

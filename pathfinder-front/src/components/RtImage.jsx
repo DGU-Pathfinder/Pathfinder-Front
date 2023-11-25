@@ -1,6 +1,6 @@
 // import { LeftCircleFilled } from "@ant-design/icons";
 import React from "react";
-import { ConfigProvider, Table, Text } from "antd";
+import { ConfigProvider, Table } from "antd";
 import { useState, useEffect, useRef } from "react";
 import "./RtImage.scss";
 
@@ -96,10 +96,6 @@ function RtImage({ rtImage }) {
         const widthRatio = displaySize.width / originalSize.width;
         const heightRatio = displaySize.height / originalSize.height;
 
-
-        console.log("widthRatio : ", widthRatio);
-        console.log("heightRatio : ", heightRatio);
-
         return {
             left: box.xmin * widthRatio,
             top: box.ymin * heightRatio,
@@ -141,7 +137,8 @@ function RtImage({ rtImage }) {
                 marginBottom: "1%",
                 fontWeight: "bold",
             }}>
-                {image_name}</p>
+                {image_name}
+            </p>
 
             <ConfigProvider
                 theme={{
@@ -167,7 +164,6 @@ function RtImage({ rtImage }) {
                     scroll={{ y: 70 }}
                 />
             </ConfigProvider>
-
         </div>
     );
 }

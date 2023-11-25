@@ -1,5 +1,4 @@
 import React from "react";
-// import { ConfigProvider, Table, Text } from "antd";
 import { useState, useEffect, useRef } from "react";
 import "./RtImageDetailData.scss";
 
@@ -36,10 +35,6 @@ function RtImageDetailData({ rtImage }) {
         const widthRatio = displaySize.width / originalSize.width;
         const heightRatio = displaySize.height / originalSize.height;
 
-
-        console.log("widthRatio : ", widthRatio);
-        console.log("heightRatio : ", heightRatio);
-
         return {
             left: box.xmin * widthRatio,
             top: box.ymin * heightRatio,
@@ -59,7 +54,6 @@ function RtImageDetailData({ rtImage }) {
                     style={{
                         width: "100%",
                         border: "3px solid white",
-                        // marginTop: "2%",
                         margin: "2%",
                     }}
                 />
