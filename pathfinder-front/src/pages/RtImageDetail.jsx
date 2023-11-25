@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Button, Col, ConfigProvider, Row, Table } from "antd"
 import RtImageDetailData from "../components/RtImageDetailData"
+import DetailTable from "../components/DetailTable"
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
@@ -10,7 +11,7 @@ function RtImageDetail() {
     const params = useParams();
     const rtImageId = params.id;
 
-    const [rtImage, setRtImage] = useState([]);
+    const [rtImage, setRtImage] = useState(null);
 
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
@@ -27,6 +28,14 @@ function RtImageDetail() {
         console.log("Rt Image Detail mounted.");
     }, []);
 
+    if (!rtImage) {
+        return <div>Loading...</div>; // 로딩 중 표시
+    }
+
+    const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
+    const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || [];
+    console.log("aiDefects : ", aiDefects);
+
     return (
         <div className='rt-image-detail-container'>
             <h1
@@ -40,31 +49,33 @@ function RtImageDetail() {
             <Row>
                 <Col span={18}>
                     <div className='rt-image-ai-detail'>
-                        {rtImage && <RtImageDetailData key={1} rtImage={rtImage} />}
+                        {/* {rtImage && <RtImageDetailData key={1} rtImage={rtImage} />} */}
+                        <RtImageDetailData key={1} rtImage={rtImage} />
                     </div>
                 </Col>
                 <Col span={6}>
-                    <Table
+                    {/* <Table
                         style={{
                             // justifyContent: "center",
                             // display: "flex",
                         }}
-                    />
+                    /> */}
+                    <DetailTable defect_set={aiDefects} analyzer={"AI"} />
                 </Col>
             </Row >
 
             <Row>
                 <Col span={18}>
                     <div className="rt-image-expert-detail">
-                        {rtImage && <RtImageDetailData key={2} rtImage={rtImage} />}
+                        <RtImageDetailData key={2} rtImage={rtImage} />
                     </div>
                 </Col>
                 <Col span={6}>
                     <Button />
-                    <Table />
+                    <DetailTable defect_set={aiDefects} analyzer={"AI"} />
                 </Col>
             </Row>
-        </div >
+        </div>
     );
 }
 
