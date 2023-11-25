@@ -127,7 +127,8 @@ function RtImage({ rtImage }) {
                             top: adjustedBox.top,
                             width: adjustedBox.width,
                             height: adjustedBox.height,
-                            border: '2px solid red'
+                            border: '1.5px solid red',
+                            marginTop: "2%",
                         }} />
                     );
                 })}

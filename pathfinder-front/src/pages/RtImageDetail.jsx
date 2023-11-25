@@ -64,8 +64,12 @@ function RtImageDetail() {
                     </div>
                 </Col>
                 <Col span={6}>
-                    <Button />
-                    <DetailTable defect_set={aiDefects} analyzer={"AI"} />
+                    <div className="rt-table-expert">
+                        <DetailTable defect_set={aiDefects} analyzer={"Expert"} />
+                        <Button>
+                            Click to Edit
+                        </Button>
+                    </div>
                 </Col>
             </Row>
         </div>

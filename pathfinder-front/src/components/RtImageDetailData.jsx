@@ -66,7 +66,8 @@ function RtImageDetailData({ rtImage }) {
                             top: adjustedBox.top,
                             width: adjustedBox.width,
                             height: adjustedBox.height,
-                            border: '2px solid red'
+                            border: '2px solid red',
+                            margin: "2%",
                         }} />
                     );
                 })}
