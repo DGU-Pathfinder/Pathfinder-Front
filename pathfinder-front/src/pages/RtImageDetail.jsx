@@ -4,7 +4,9 @@ import Axios from "axios"
 import { Button, Col, ConfigProvider, Divider, Row } from "antd"
 import RtImageDetailData from "../components/RtImageDetailData"
 import DetailTable from "../components/DetailTable"
+import RtImageModal from "../components/RtImageModal"
 import "./RtImageDetail.scss"
+import RtImage from "../components/RtImage"
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
@@ -13,6 +15,11 @@ function RtImageDetail() {
     const rtImageId = params.id;
 
     const [rtImage, setRtImage] = useState(null);
+    const [modalIsOpen, setModalIsOpen] = useState(false);
+
+    const openModal = () => setModalIsOpen(true);
+    const closeModal = () => setModalIsOpen(false);
+
 
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
@@ -36,6 +43,8 @@ function RtImageDetail() {
     const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
     const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
     console.log("aiDefects : ", aiDefects);
+
+
 
     return (
         <div className='rt-image-detail-container'>
@@ -96,7 +105,9 @@ function RtImageDetail() {
                                 }
                             }}
                         >
-                            <Button className="rt-image-edit-button"
+                            <Button
+                                className="rt-image-edit-button"
+                                onClick={openModal}
                                 style={{
                                     width: "70%",
                                     display: "block",
@@ -105,6 +116,11 @@ function RtImageDetail() {
                                 }}>
                                 Click to Edit
                             </Button>
+                            <RtImageModal
+                                isOpen={modalIsOpen}
+                                onRequestClose={closeModal}
+                                rtImage={rtImage}
+                            />
                         </ConfigProvider>
                     </div>
                 </Col>
