@@ -31,12 +31,27 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                     backgroundColor: "rgba(0, 0, 0, 0.75)",
                 },
                 content: {
-                    top: "10%",
+                    // top: "10%",
                     borderRadius: "10px",
                     backgroundColor: "rgba(0, 0, 0, 0.75)",
                 },
             }}
         >
+            <div className="rt-image-modal-header">
+                <Button
+                    className="rt-image-modal-save-button"
+                    onClick={onRequestClose}
+                    style={{
+                        display: "block",
+                        position: "fixed",
+                        width: "10%",
+                        marginTop: "1%",
+                        marginLeft: "80%",
+                    }}
+                >
+                    save and close
+                </Button>
+            </div>
             <div className="rt-image-modal-body">
                 <img
                     className="rt-image-modal-image"
@@ -46,20 +61,6 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                         display: "block", margin: "auto",
                     }}
                 />
-                <Button
-                    className="rt-image-modal-save-button"
-                    onClick={onRequestClose}
-                    style={{
-                        display: "block",
-                        position: "fixed",
-                        // margin: "auto",
-                        // marginLeft: "auto",
-                        marginTop: "2%",
-                    }}
-                >
-                    save and close
-                </Button>
-
             </div>
         </Modal>
     );
