@@ -50,7 +50,7 @@ function AppHeader() {
       className="main-header"
       style={{
         backgroundColor: '#2C2C2C',
-        position: 'sticky',
+        // position: 'sticky',
         top: 0,
         zIndex: 1,
         width: '100%',
