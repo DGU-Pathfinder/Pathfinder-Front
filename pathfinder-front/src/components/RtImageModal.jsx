@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext, useRef, useEffect, useCallback } from "react";
 import Modal from "react-modal";
-import { Button, ConfigProvider, FloatButton } from "antd";
+import { Button, FloatButton } from "antd";
 import "./RtImageModal.scss";
 import { PlusOutlined, DeleteOutlined, EyeOutlined, SaveOutlined } from "@ant-design/icons";
 
@@ -14,6 +14,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const [currentBox, setCurrentBox] = useState(null);
 
     const [boxes, setBoxes] = useState([]);
+    const [currentDefectType, setDefectType] = useState(null);
     const imageRef = useRef(null);
 
     const getCoordinates = (e) => {
@@ -131,6 +132,40 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                     />
                 ))}
             </div>
+
+            <FloatButton.Group shape="square" style={{ right: 124, bottom: 75 }}>
+                <FloatButton
+                    description="Slag"
+                    shape="square"
+                    style={{
+                        fontWeight: 'bold',
+                        right: 94,
+                        color: currentDefectType !== 'slag' ? '#121212' : 'rgba(228, 122, 58)'
+                    }}
+                    onClick={() => setDefectType('slag')}
+                />
+                <FloatButton
+                    description="Poro"
+                    shape="square"
+                    style={{
+                        fontWeight: 'bold',
+                        right: 94,
+                        color: currentDefectType !== 'porosity' ? '#121212' : 'rgba(228, 122, 58)'
+                    }}
+                    onClick={() => setDefectType('porosity')}
+                />
+                <FloatButton
+                    description="Other"
+                    shape="square"
+                    style={{
+                        fontWeight: 'bold',
+                        right: 94,
+                        color: currentDefectType !== 'others' ? '#121212' : 'rgba(228, 122, 58)'
+                    }}
+                    onClick={() => setDefectType('others')}
+                />
+            </FloatButton.Group>
+
             <FloatButton.Group shape="circle" style={{ right: 64, bottom: 60 }}>
                 <FloatButton
                     icon={
