@@ -2,6 +2,19 @@ import React from "react";
 import { useState, useEffect, useRef } from "react";
 import "./RtImageDetailData.scss";
 
+function getBorderColor(defectType) {
+    switch (defectType) {
+        case 'slag':
+            return 'red';
+        case 'porosity':
+            return 'blue';
+        case 'others':
+            return 'rgba(97, 197, 84)';
+        default:
+            return 'white';
+    }
+}
+
 function RtImageDetailData({ rtImage }) {
     const { image, image_name } = rtImage;
     const defects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
@@ -59,16 +72,18 @@ function RtImageDetailData({ rtImage }) {
                 />
                 {defects.map((box, index) => {
                     const adjustedBox = calculateAdjustedBox(box);
+                    let border_style = '2px solid '
+                    border_style += getBorderColor(box.defect_type);
+                    const box_style = {
+                        position: 'absolute',
+                        left: adjustedBox.left,
+                        top: adjustedBox.top,
+                        width: adjustedBox.width,
+                        height: adjustedBox.height,
+                        border: border_style,
+                    }
                     return (
-                        <div key={index} style={{
-                            position: 'absolute',
-                            left: adjustedBox.left,
-                            top: adjustedBox.top,
-                            width: adjustedBox.width,
-                            height: adjustedBox.height,
-                            border: '2px solid red',
-                            // margin: "2%",
-                        }} />
+                        <div key={index} style={box_style} />
                     );
                 })}
             </div>

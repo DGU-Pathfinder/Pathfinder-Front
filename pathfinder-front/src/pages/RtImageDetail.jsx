@@ -40,11 +40,9 @@ function RtImageDetail() {
         return <div>Loading...</div>;
     }
 
-    const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || [];
+    const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || "no ai data"
     const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
     console.log("aiDefects : ", aiDefects);
-
-
 
     return (
         <div className='rt-image-detail-container'>
@@ -67,6 +65,7 @@ function RtImageDetail() {
                     <DetailTable defect_set={aiDefects} analyzer={"AI"} />
                 </Col>
             </Row >
+
             <div
                 className="rt-image-detail-divider"
                 style={{
@@ -81,6 +80,7 @@ function RtImageDetail() {
                     }}
                 />
             </div>
+
             <Row align="middle">
                 <Col span={18}>
                     <div className="rt-image-expert-detail">
