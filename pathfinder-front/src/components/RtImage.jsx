@@ -32,9 +32,11 @@ function makeDataForTable(data_set, name, analyzer) {
     let porosity_cnt = 0;
     let others_cnt = 0;
 
+    console.log("data_set : ", data_set);
+
     if (data_set === null)
         return 0;
-    else if (data_set === "no expert data")
+    else if (data_set === "no expert data" || data_set === "no ai data")
         return {
             key: '1',
             Analyzer: analyzer,
@@ -42,7 +44,6 @@ function makeDataForTable(data_set, name, analyzer) {
             porosity: '-',
             others: '-',
         };
-    data_set = data_set[0][name];
     for (const value of data_set) {
         if (value["defect_type"] === "slag")
             slag_cnt += 1;
@@ -64,7 +65,7 @@ function makeDataForTable(data_set, name, analyzer) {
 function RtImage({ rtImage }) {
     const { image, image_name, ai_model_set, expert } = rtImage;
     const defects = rtImage.ai_model_set[0].ai_defect_set;
-    const ai_model_data = makeDataForTable(ai_model_set, "ai_defect_set", "AI");
+    const ai_model_data = makeDataForTable(ai_model_set?.[0]?.ai_defect_set || "no ai data", "ai_defect_set", "AI");
     const expert_data = makeDataForTable(expert?.[0]?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
     const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
     const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
