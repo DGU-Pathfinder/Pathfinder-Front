@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
-import RtImage from "../components/RtImage"
+import RtImage from "../../components/RtImageList/RtImage"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
 import "./RtImageList.scss"
 

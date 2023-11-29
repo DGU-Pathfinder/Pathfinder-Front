@@ -1,11 +1,11 @@
 import React from "react"
 import { Routes, Route } from "react-router-dom";
-import AppLayout from "../components/AppLayout";
+import AppLayout from "../components/AppLayout/AppLayout";
 import UserRegister from "./accounts/UserRegister";
 import UserLogin from "./accounts/UserLogin";
-import RtImageList from "./RtImageList";
-import UploadImage from "./UploadImage";
-import RtImageDetail from "./RtImageDetail";
+import RtImageList from "./RtImageList/RtImageList";
+import UploadImage from "./UploadImage/UploadImage";
+import RtImageDetail from "./RtImageDetail/RtImageDetail";
 
 function Root() {
     return (

@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Button, Col, ConfigProvider, Divider, Row } from "antd"
-import RtImageDetailData from "../components/RtImageDetailData"
-import DetailTable from "../components/DetailTable"
-import RtImageModal from "../components/RtImageModal"
+import RtImageDetailData from "../../components/RtImageDetail/RtImageDetailData"
+import DetailTable from "../../components/RtImageDetail/DetailTable"
+import RtImageModal from "../../components/RtImageDetail/RtImageModal"
 import "./RtImageDetail.scss"
-import RtImage from "../components/RtImage"
+// import RtImage from "../components/RtImage"
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
