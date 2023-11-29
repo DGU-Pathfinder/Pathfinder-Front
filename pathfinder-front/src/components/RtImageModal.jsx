@@ -14,7 +14,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const [currentBox, setCurrentBox] = useState(null);
 
     const [boxes, setBoxes] = useState([]);
-    const [currentDefectType, setDefectType] = useState(null);
+    const [currentDefectType, setDefectType] = useState('slag');
     const imageRef = useRef(null);
 
     const getCoordinates = (e) => {
@@ -34,12 +34,17 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                     console.log("mousedown");
                     const newBox = {
                         id: Date.now(),
+                        // modifier: 'user',
+                        // modifier_name: 'User',
+                        modified_date: new Date().toISOString(),
+                        defect_type: currentDefectType,
                         xmin: coords.x,
                         ymin: coords.y,
                         xmax: coords.x,
                         ymax: coords.y,
                     };
                     setCurrentBox(newBox);
+                    console.log("newBox : ", newBox);
                 } else if (e.type === 'mouseup') {
                     console.log("mouseup");
                     const completedBox = {
@@ -55,7 +60,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                 break;
             default:
         }
-    }, [currentMode, currentBox]);
+    }, [currentMode, currentBox, currentDefectType]);
 
     const deleteBox = (boxId) => {
         if (currentMode === 'delete')
