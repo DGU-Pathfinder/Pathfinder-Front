@@ -5,14 +5,24 @@ import RtImage from "../../components/RtImageList/RtImage"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
 import "./RtImageList.scss"
 
-const apiUrl = "http://localhost:8000/api/rt-images/";
+let apiUrl = "http://localhost:8000/api/rt-images/";
+
 
 function RtImageList() {
     const [rtImageList, setRtImageList] = useState([]);
     const [data, setData] = useState([]);
+    const [current, setCurrent] = useState(1);
+    const onChange = (page) => {
+            setCurrent(page);
+            console.log(page);
+        };
 
     useEffect(() => {
-        Axios.get(apiUrl)
+        let temp;
+        
+        temp ="?page=" + current;
+
+        Axios.get(apiUrl+temp)
             .then((response) => {
                 const { data } = response;
                 console.log("loaded response : ", response);
@@ -24,7 +34,7 @@ function RtImageList() {
             });
 
         console.log("Rt Image List mounted.");
-    }, []);
+    }, [current]);
 
     return (
         <div className="rt-page">
@@ -54,7 +64,8 @@ function RtImageList() {
                 }}
             >
                 <Pagination
-                    current={1}
+                    current={current}
+                    onChange={onChange}
                     defaultCurrent={1}
                     defaultPageSize={6}
                     pageSize={6}
