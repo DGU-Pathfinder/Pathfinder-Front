@@ -9,6 +9,19 @@ let id_cnt = 0;
 
 export const useRtModal = () => useContext(RtImageModalContext);
 
+function getBorderColor(defectType) {
+    switch (defectType) {
+        case 'slag':
+            return 'red';
+        case 'porosity':
+            return 'blue';
+        case 'others':
+            return 'rgba(97, 197, 84)';
+        default:
+            return 'white';
+    }
+}
+
 function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const { image, image_name } = rtImage;
     const [currentMode, setCurrentMode] = useState('default');
@@ -136,20 +149,28 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                         display: "block", margin: "auto",
                     }}
                 />
-                {boxes.map((box, index) => (
-                    <div
-                        key={index}
-                        style={{
-                            position: 'absolute',
-                            border: '2px solid red',
-                            left: box.xmin,
-                            top: box.ymin,
-                            width: box.xmax - box.xmin,
-                            height: box.ymax - box.ymin,
-                        }}
-                        onClick={() => deleteBox(box.id)}
-                    />
-                ))}
+                {boxes.map((box, index) => {
+
+                    let border_style = '2px solid '
+                    border_style += getBorderColor(box.defect_type);
+
+                    const box_style = {
+                        position: 'absolute',
+                        border: border_style,
+                        left: box.xmin,
+                        top: box.ymin,
+                        width: box.xmax - box.xmin,
+                        height: box.ymax - box.ymin,
+                    }
+                    return (
+                        <div
+                            key={index}
+                            style={box_style}
+                            onClick={() => deleteBox(box.id)}
+                        />
+                    );
+                }
+                )}
             </div>
 
             <FloatButton.Group shape="square" style={{ right: 124, bottom: 75 }}>
