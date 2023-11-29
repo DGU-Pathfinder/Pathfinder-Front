@@ -33,7 +33,7 @@ function makeDataForTable(data_set, analyzer) {
 
     if (data_set === undefined)
         return 0;
-    else if (data_set === "no expert data")
+    else if (data_set === "no expert data" || data_set === "no ai data")
         return {
             key: '1',
             Analyzer: analyzer,
