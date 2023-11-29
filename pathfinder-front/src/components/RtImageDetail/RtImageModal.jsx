@@ -5,6 +5,7 @@ import "./RtImageModal.scss";
 import { PlusOutlined, DeleteOutlined, EyeOutlined, SaveOutlined } from "@ant-design/icons";
 
 const RtImageModalContext = createContext();
+let id_cnt = 0;
 
 export const useRtModal = () => useContext(RtImageModalContext);
 
@@ -18,9 +19,16 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const imageRef = useRef(null);
 
     useEffect(() => {
+        const initialBoxes = rtImage.expert ? rtImage.expert.expert_defect_set : (rtImage.ai_model?.ai_defect_set || []);
 
-        const initialBoxes = rtImage.expert || rtImage.ai_model?.ai_defect_set || [];
-        setBoxes(initialBoxes);
+        console.log("initialBoxes : ", initialBoxes);
+
+        const boxes = initialBoxes.map(box => ({
+            ...box,
+            id: id_cnt++,
+        }));
+
+        setBoxes(boxes);
     }, []);
 
     const getCoordinates = (e) => {
@@ -39,7 +47,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
                 if (e.type === 'mousedown') {
                     console.log("mousedown");
                     const newBox = {
-                        id: Date.now(),
+                        id: id_cnt++,
                         // modifier: 'user',
                         // modifier_name: 'User',
                         modified_date: new Date().toISOString(),
@@ -85,8 +93,6 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
             imageElement.removeEventListener('mouseup', handleEvent);
         };
     }, [handleEvent]);
-
-
 
     return (
         <Modal
