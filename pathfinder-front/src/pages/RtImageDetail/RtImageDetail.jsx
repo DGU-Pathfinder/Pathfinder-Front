@@ -40,7 +40,7 @@ function RtImageDetail() {
         return <div>Loading...</div>;
     }
 
-    const aiDefects = rtImage?.ai_model_set?.[0]?.ai_defect_set || "no ai data"
+    const aiDefects = rtImage?.ai_model?.ai_defect_set || "no ai data"
     const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
     console.log("aiDefects : ", aiDefects);
 

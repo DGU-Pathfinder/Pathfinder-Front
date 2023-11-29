@@ -17,6 +17,12 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const [currentDefectType, setDefectType] = useState('slag');
     const imageRef = useRef(null);
 
+    useEffect(() => {
+
+        const initialBoxes = rtImage.expert || rtImage.ai_model?.ai_defect_set || [];
+        setBoxes(initialBoxes);
+    }, []);
+
     const getCoordinates = (e) => {
         const rect = imageRef.current.getBoundingClientRect();
         const x = e.clientX - rect.left;
@@ -79,6 +85,8 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
             imageElement.removeEventListener('mouseup', handleEvent);
         };
     }, [handleEvent]);
+
+
 
     return (
         <Modal
