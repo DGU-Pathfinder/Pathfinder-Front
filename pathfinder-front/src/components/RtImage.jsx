@@ -62,6 +62,19 @@ function makeDataForTable(data_set, name, analyzer) {
     return data;
 }
 
+function getBorderColor(defectType) {
+    switch (defectType) {
+        case 'slag':
+            return 'red';
+        case 'porosity':
+            return 'blue';
+        case 'others':
+            return 'rgba(97, 197, 84)';
+        default:
+            return 'white';
+    }
+}
+
 function RtImage({ rtImage }) {
     const { image, image_name, ai_model_set, expert } = rtImage;
     const defects = rtImage.ai_model_set[0].ai_defect_set;
@@ -120,16 +133,20 @@ function RtImage({ rtImage }) {
                 />
                 {defects.map((box, index) => {
                     const adjustedBox = calculateAdjustedBox(box);
+                    let border_style = '2px solid '
+                    border_style += getBorderColor(box.defect_type);
+
+                    const box_style = {
+                        position: 'absolute',
+                        left: adjustedBox.left,
+                        top: adjustedBox.top,
+                        width: adjustedBox.width,
+                        height: adjustedBox.height,
+                        border: border_style,
+                        marginTop: "2%",
+                    }
                     return (
-                        <div key={index} style={{
-                            position: 'absolute',
-                            left: adjustedBox.left,
-                            top: adjustedBox.top,
-                            width: adjustedBox.width,
-                            height: adjustedBox.height,
-                            border: '1.5px solid red',
-                            marginTop: "2%",
-                        }} />
+                        <div key={index} style={box_style} />
                     );
                 })}
             </div>
