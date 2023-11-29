@@ -77,7 +77,8 @@ function getBorderColor(defectType) {
 
 function RtImage({ rtImage }) {
     const { image, image_name, ai_model_set, expert } = rtImage;
-    const defects = rtImage.ai_model_set[0].ai_defect_set;
+    const defects = ai_model_set?.[0]?.ai_defect_set;
+    console.log('8888888888888888888', defects)
     const ai_model_data = makeDataForTable(ai_model_set?.[0]?.ai_defect_set || "no ai data", "ai_defect_set", "AI");
     const expert_data = makeDataForTable(expert?.[0]?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
     const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
@@ -131,7 +132,7 @@ function RtImage({ rtImage }) {
                         marginTop: "2%",
                     }}
                 />
-                {defects.map((box, index) => {
+                {defects && defects.map((box, index) => {
                     const adjustedBox = calculateAdjustedBox(box);
                     let border_style = '2px solid '
                     border_style += getBorderColor(box.defect_type);
