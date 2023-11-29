@@ -19,7 +19,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
 
     useEffect(() => {
 
-        const initialBoxes = rtImage.expert || rtImage.ai_model_set?.[0]?.ai_defect_set || [];
+        const initialBoxes = rtImage.expert || rtImage.ai_model?.ai_defect_set || [];
         setBoxes(initialBoxes);
     }, []);
 
