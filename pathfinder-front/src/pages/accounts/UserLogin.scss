@@ -1,0 +1,27 @@
+.pathfinder-main {
+    box-sizing: border-box;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.pathfinder-logo {
+    height: 117px;
+    width: 128px;
+    background-image: url('../../assets/png/hanwha_logo.png');
+    background-size: cover;
+    display: block;
+    margin-right: 1%;
+}
+
+.pathfinder-title {
+    display: block;
+    color: rgba(228, 122, 58);
+    font-size: 100px;
+    font-weight: bold;
+    margin: 5% 0 5% 0;
+}
+
+.login-button:hover {
+    border-color: rgba(228, 122, 58) !important;
+}
