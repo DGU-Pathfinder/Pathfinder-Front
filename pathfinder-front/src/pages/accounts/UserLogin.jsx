@@ -1,17 +1,43 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import "./UserLogin.scss"
 import { ConfigProvider, Space } from "antd";
 import { Button, Checkbox, Form, Input } from 'antd';
+import axios from "axios";
+
+const loginUrl = "http://localhost:8000/api/accounts/dj-rest-auth/login/";
 
 const onFinish = (values) => {
-    console.log('Success:', values);
+    console.log('User Input :', values);
+    axios.post(loginUrl, {
+        username: values.username,
+        password: values.password,
+    })
+        .then((response) => {
+            const { data } = response;
+            console.log("loaded response : ", response);
+            console.log("data : ", data);
+            if (data["statusText"] === "OK") {
+                console.log("login success");
+                window.location.href = "";
+            }
+            else {
+                console.log("login fail");
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
 };
+
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
 
 
 function UserLogin() {
+    const [form] = Form.useForm();
+
     return (
         <div className="user-login">
             <div className="pathfinder-main">
@@ -34,7 +60,7 @@ function UserLogin() {
                     }
                 }}>
                     <Form
-                        // form={form}
+                        form={form}
                         name="basic"
                         labelCol={{
                             span: 6,
