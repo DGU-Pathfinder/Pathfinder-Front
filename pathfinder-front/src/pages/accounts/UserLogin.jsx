@@ -1,34 +1,14 @@
-import React, { useState, useEffect } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import "./UserLogin.scss"
-import { ConfigProvider, Space } from "antd";
-import { Button, Checkbox, Form, Input } from 'antd';
+import { ConfigProvider } from "antd";
+import { Button, Form, Input } from 'antd';
 import axios from "axios";
+import TokenContext from "../../components/JwtAuth/TokenContext";
 
 const loginUrl = "http://localhost:8000/api/accounts/dj-rest-auth/login/";
 
-const onFinish = (values) => {
-    console.log('User Input :', values);
-    axios.post(loginUrl, {
-        username: values.username,
-        password: values.password,
-    })
-        .then((response) => {
-            const { data } = response;
-            console.log("loaded response : ", response);
-            console.log("data : ", data);
-            if (data["statusText"] === "OK") {
-                console.log("login success");
-                window.location.href = "";
-            }
-            else {
-                console.log("login fail");
-            }
-        })
-        .catch((error) => {
-            console.log(error);
-        });
 
-};
+
 
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
@@ -37,6 +17,36 @@ const onFinishFailed = (errorInfo) => {
 
 function UserLogin() {
     const [form] = Form.useForm();
+    const {
+        accessToken, setAccessToken,
+        refreshToken, setRefreshToken
+    } = useContext(TokenContext);
+    const onFinish = (values) => {
+        console.log('User Input :', values);
+        axios.post(loginUrl, {
+            username: values.username,
+            password: values.password,
+        })
+            .then((response) => {
+                const { data } = response;
+
+                console.log("loaded response : ", response);
+                console.log("data : ", data);
+                console.log("login success");
+                setAccessToken(data.access);
+                setRefreshToken(data.refresh);
+                // console.log("accessToken : ", accessToken);
+                // console.log("accessToken : ", data.access);
+                console.log("refreshToken : ", refreshToken);
+                console.log("refreshToken : ", data.refresh);
+                window.location.href = "/";
+            })
+            .catch((error) => {
+                console.log(error.response);
+                alert("Login Failed");
+            });
+
+    };
 
     return (
         <div className="user-login">

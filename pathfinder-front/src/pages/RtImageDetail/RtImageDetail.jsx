@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Button, Col, ConfigProvider, Divider, Row } from "antd"
@@ -6,11 +6,12 @@ import RtImageDetailData from "../../components/RtImageDetail/RtImageDetailData"
 import DetailTable from "../../components/RtImageDetail/DetailTable"
 import RtImageModal from "../../components/RtImageDetail/RtImageModal"
 import "./RtImageDetail.scss"
-// import RtImage from "../components/RtImage"
+import TokenContext from "../../components/JwtAuth/TokenContext"
 
 const apiUrl = "http://localhost:8000/api/rt-images/";
 
 function RtImageDetail() {
+    const { accessToken } = useContext(TokenContext);
     const params = useParams();
     const rtImageId = params.id;
 
@@ -23,7 +24,7 @@ function RtImageDetail() {
 
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
-        Axios.get(apiUrl + rtImageId)
+        Axios.get(apiUrl + rtImageId, { headers: { Authorization: `Bearer ${accessToken}` } })
             .then((response) => {
                 const { data } = response;
                 console.log("loaded response : ", response);
