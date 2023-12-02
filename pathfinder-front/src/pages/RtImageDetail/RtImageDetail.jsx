@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react"
+import React, { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Button, Col, ConfigProvider, Divider, Row } from "antd"
@@ -6,12 +6,10 @@ import RtImageDetailData from "../../components/RtImageDetail/RtImageDetailData"
 import DetailTable from "../../components/RtImageDetail/DetailTable"
 import RtImageModal from "../../components/RtImageDetail/RtImageModal"
 import "./RtImageDetail.scss"
-import TokenContext from "../../components/JwtAuth/TokenContext"
 
 const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 function RtImageDetail() {
-    const { accessToken, setAccessToken } = useContext(TokenContext);
     const params = useParams();
     const rtImageId = params.id;
 
@@ -21,10 +19,8 @@ function RtImageDetail() {
     const openModal = () => setModalIsOpen(true);
     const closeModal = () => setModalIsOpen(false);
 
-
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
-        console.log("accessToken : ", accessToken);
         Axios.get(apiUrl + rtImageId, { withCredentials: true })
             .then((response) => {
                 const { data } = response;
@@ -36,7 +32,7 @@ function RtImageDetail() {
             });
 
         console.log("Rt Image Detail mounted.");
-    }, [accessToken, rtImageId]);
+    }, [rtImageId]);
 
     if (!rtImage) {
         return <div>Loading...</div>;
@@ -103,7 +99,6 @@ function RtImageDetail() {
                                         defaultBorderColor: "rgba(255, 255, 255)",
                                         defaultColor: "rgba(255, 255, 255)",
                                     }
-
                                 }
                             }}
                         >

@@ -113,11 +113,8 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
             isOpen={isOpen}
             onRequestClose={onRequestClose}
             style={{
-                overlay: {
-                    backgroundColor: "rgba(0, 0, 0, 0.75)",
-                },
+                overlay: { backgroundColor: "rgba(0, 0, 0, 0.75)", },
                 content: {
-                    // top: "10%",
                     borderRadius: "10px",
                     backgroundColor: "rgba(0, 0, 0, 0.75)",
                 },
