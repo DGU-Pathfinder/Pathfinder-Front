@@ -5,7 +5,7 @@ import RtImage from "../../components/RtImageList/RtImage"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
 import "./RtImageList.scss"
 
-let apiUrl = "http://localhost:8000/api/rt-images/";
+let apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
 function RtImageList() {
@@ -13,16 +13,16 @@ function RtImageList() {
     const [data, setData] = useState([]);
     const [current, setCurrent] = useState(1);
     const onChange = (page) => {
-            setCurrent(page);
-            console.log(page);
-        };
+        setCurrent(page);
+        console.log(page);
+    };
 
     useEffect(() => {
         let temp;
-        
-        temp ="?page=" + current;
 
-        Axios.get(apiUrl+temp)
+        temp = "?page=" + current;
+
+        Axios.get(apiUrl + temp, { withCredentials: true })
             .then((response) => {
                 const { data } = response;
                 console.log("loaded response : ", response);

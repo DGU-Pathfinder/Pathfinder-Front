@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useContext } from "react"
 import { useParams } from "react-router-dom"
 import Axios from "axios"
 import { Button, Col, ConfigProvider, Divider, Row } from "antd"
@@ -6,11 +6,12 @@ import RtImageDetailData from "../../components/RtImageDetail/RtImageDetailData"
 import DetailTable from "../../components/RtImageDetail/DetailTable"
 import RtImageModal from "../../components/RtImageDetail/RtImageModal"
 import "./RtImageDetail.scss"
-// import RtImage from "../components/RtImage"
+import TokenContext from "../../components/JwtAuth/TokenContext"
 
-const apiUrl = "http://localhost:8000/api/rt-images/";
+const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 function RtImageDetail() {
+    const { accessToken, setAccessToken } = useContext(TokenContext);
     const params = useParams();
     const rtImageId = params.id;
 
@@ -23,18 +24,19 @@ function RtImageDetail() {
 
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
-        Axios.get(apiUrl + rtImageId)
+        console.log("accessToken : ", accessToken);
+        Axios.get(apiUrl + rtImageId, { withCredentials: true })
             .then((response) => {
                 const { data } = response;
                 console.log("loaded response : ", response);
                 setRtImage(data);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response);
             });
 
         console.log("Rt Image Detail mounted.");
-    }, []);
+    }, [accessToken, rtImageId]);
 
     if (!rtImage) {
         return <div>Loading...</div>;

@@ -41,6 +41,7 @@ const UploadImage = () => (
                     style={{
                         borderColor: 'rgba(228, 122, 58)',
                     }}
+                    withCredentials={true}
                 >
                     <p className="ant-upload-drag-icon">
                         <InboxOutlined style={{ color: "white" }} />
