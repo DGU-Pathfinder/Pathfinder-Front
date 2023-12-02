@@ -5,15 +5,11 @@ import { Button, Form, Input } from 'antd';
 import axios from "axios";
 import TokenContext from "../../components/JwtAuth/TokenContext";
 
-const loginUrl = "http://localhost:8000/api/accounts/dj-rest-auth/login/";
-
-
-
+const loginUrl = "http://127.0.0.1:8000/api/accounts/dj-rest-auth/login/";
 
 const onFinishFailed = (errorInfo) => {
     console.log('Failed:', errorInfo);
 };
-
 
 function UserLogin() {
     const [form] = Form.useForm();
@@ -21,32 +17,41 @@ function UserLogin() {
         accessToken, setAccessToken,
         refreshToken, setRefreshToken
     } = useContext(TokenContext);
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('User Input :', values);
-        axios.post(loginUrl, {
-            username: values.username,
-            password: values.password,
-        })
-            .then((response) => {
-                const { data } = response;
-
+        try {
+            const response = await axios.post(loginUrl, {
+                username: values.username,
+                password: values.password,
+            },
+                { withCredentials: true }
+            );
+            if (response.status === 200) {
                 console.log("loaded response : ", response);
-                console.log("data : ", data);
                 console.log("login success");
-                setAccessToken(data.access);
-                setRefreshToken(data.refresh);
-                // console.log("accessToken : ", accessToken);
-                // console.log("accessToken : ", data.access);
-                console.log("refreshToken : ", refreshToken);
-                console.log("refreshToken : ", data.refresh);
                 window.location.href = "/";
-            })
-            .catch((error) => {
-                console.log(error.response);
-                alert("Login Failed");
-            });
+            } else {
+                console.log("login failed");
+            }
+        }
+        catch (error) {
+            console.log(error.response);
+            alert("Login Failed");
+        }
 
     };
+
+    useEffect(() => {
+        if (accessToken) {
+            console.log("accessToken : ", accessToken);
+            setAccessToken(accessToken);
+        }
+
+        if (refreshToken) {
+            console.log("refreshToken : ", refreshToken);
+            setAccessToken(refreshToken);
+        }
+    }, [accessToken, refreshToken]);
 
     return (
         <div className="user-login">

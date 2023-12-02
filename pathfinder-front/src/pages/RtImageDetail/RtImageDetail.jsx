@@ -8,10 +8,10 @@ import RtImageModal from "../../components/RtImageDetail/RtImageModal"
 import "./RtImageDetail.scss"
 import TokenContext from "../../components/JwtAuth/TokenContext"
 
-const apiUrl = "http://localhost:8000/api/rt-images/";
+const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 function RtImageDetail() {
-    const { accessToken } = useContext(TokenContext);
+    const { accessToken, setAccessToken } = useContext(TokenContext);
     const params = useParams();
     const rtImageId = params.id;
 
@@ -24,18 +24,19 @@ function RtImageDetail() {
 
     useEffect(() => {
         console.log("URL : ", apiUrl + rtImageId);
-        Axios.get(apiUrl + rtImageId, { headers: { Authorization: `Bearer ${accessToken}` } })
+        console.log("accessToken : ", accessToken);
+        Axios.get(apiUrl + rtImageId, { withCredentials: true })
             .then((response) => {
                 const { data } = response;
                 console.log("loaded response : ", response);
                 setRtImage(data);
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error.response);
             });
 
         console.log("Rt Image Detail mounted.");
-    }, []);
+    }, [accessToken, rtImageId]);
 
     if (!rtImage) {
         return <div>Loading...</div>;
