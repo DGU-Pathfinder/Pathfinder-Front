@@ -22,6 +22,11 @@
   margin: 5% 0 5% 0;
 }
 
+#normal_login_password::placeholder,
+#normal_login_username::placeholder {
+  color: #888888;
+}
+
 .login-button:hover {
   border-color: rgba(228, 122, 58) !important;
 }
