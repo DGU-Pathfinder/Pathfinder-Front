@@ -3,91 +3,91 @@ import { useState, useEffect, useRef } from "react";
 import "./RtImageDetailData.scss";
 
 function getBorderColor(defectType) {
-    switch (defectType) {
-        case 'slag':
-            return 'red';
-        case 'porosity':
-            return 'blue';
-        case 'others':
-            return 'rgba(97, 197, 84)';
-        default:
-            return 'white';
-    }
+  switch (defectType) {
+    case 'slag':
+      return 'red';
+    case 'porosity':
+      return 'blue';
+    case 'others':
+      return 'rgba(97, 197, 84)';
+    default:
+      return 'white';
+  }
 }
 
 function RtImageDetailData({ rtImage }) {
-    const { image, image_name } = rtImage;
-    const defects = rtImage?.ai_model?.ai_defect_set || [];
-    const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
-    const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
-    const imageRef = useRef(null);
+  const { image, image_name } = rtImage;
+  const defects = rtImage?.ai_model?.ai_defect_set || [];
+  const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
+  const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
+  const imageRef = useRef(null);
 
-    useEffect(() => {
-        const imageObj = new Image();
-        imageObj.onload = () => {
-            setOriginalSize({ width: imageObj.naturalWidth, height: imageObj.naturalHeight });
-            updateDisplaySize();
-        };
-        imageObj.src = image;
-
-        window.addEventListener('resize', updateDisplaySize);
-
-        return () => {
-            window.removeEventListener('resize', updateDisplaySize);
-        };
-    }, [image]);
-
-    const updateDisplaySize = () => {
-        if (imageRef.current) {
-            setDisplaySize({ width: imageRef.current.offsetWidth, height: imageRef.current.offsetHeight });
-        }
+  useEffect(() => {
+    const imageObj = new Image();
+    imageObj.onload = () => {
+      setOriginalSize({ width: imageObj.naturalWidth, height: imageObj.naturalHeight });
+      updateDisplaySize();
     };
+    imageObj.src = image;
 
-    const calculateAdjustedBox = (box) => {
-        const widthRatio = displaySize.width / originalSize.width;
-        const heightRatio = displaySize.height / originalSize.height;
+    window.addEventListener('resize', updateDisplaySize);
 
-        return {
-            left: box.xmin * widthRatio,
-            top: box.ymin * heightRatio,
-            width: (box.xmax - box.xmin) * widthRatio,
-            height: (box.ymax - box.ymin) * heightRatio
-        };
+    return () => {
+      window.removeEventListener('resize', updateDisplaySize);
     };
+  }, [image]);
 
-    return (
-        <div className="rt-image-detail">
-            <div style={{ position: 'relative' }}>
-                <img
-                    className="small-image"
-                    ref={imageRef}
-                    src={image}
-                    alt={image_name}
-                    style={{
-                        width: "100%",
-                        border: "3px solid white",
-                        // margin: "2%",
-                    }}
-                />
-                {defects.map((box, index) => {
-                    const adjustedBox = calculateAdjustedBox(box);
-                    let border_style = '2px solid '
-                    border_style += getBorderColor(box.defect_type);
-                    const box_style = {
-                        position: 'absolute',
-                        left: adjustedBox.left,
-                        top: adjustedBox.top,
-                        width: adjustedBox.width,
-                        height: adjustedBox.height,
-                        border: border_style,
-                    }
-                    return (
-                        <div key={index} style={box_style} />
-                    );
-                })}
-            </div>
-        </div>
-    );
+  const updateDisplaySize = () => {
+    if (imageRef.current) {
+      setDisplaySize({ width: imageRef.current.offsetWidth, height: imageRef.current.offsetHeight });
+    }
+  };
+
+  const calculateAdjustedBox = (box) => {
+    const widthRatio = displaySize.width / originalSize.width;
+    const heightRatio = displaySize.height / originalSize.height;
+
+    return {
+      left: box.xmin * widthRatio,
+      top: box.ymin * heightRatio,
+      width: (box.xmax - box.xmin) * widthRatio,
+      height: (box.ymax - box.ymin) * heightRatio
+    };
+  };
+
+  return (
+    <div className="rt-image-detail">
+      <div style={{ position: 'relative' }}>
+        <img
+          className="small-image"
+          ref={imageRef}
+          src={image}
+          alt={image_name}
+          style={{
+            width: "100%",
+            border: "3px solid white",
+            // margin: "2%",
+          }}
+        />
+        {defects.map((box, index) => {
+          const adjustedBox = calculateAdjustedBox(box);
+          let border_style = '2px solid '
+          border_style += getBorderColor(box.defect_type);
+          const box_style = {
+            position: 'absolute',
+            left: adjustedBox.left,
+            top: adjustedBox.top,
+            width: adjustedBox.width,
+            height: adjustedBox.height,
+            border: border_style,
+          }
+          return (
+            <div key={index} style={box_style} />
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 export default RtImageDetailData;
