@@ -7,7 +7,7 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './Filter.scss'
 dayjs.extend(customParseFormat);
 
-const apiUrl = "http://localhost:8000/api/rt-images/";
+const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
 function Filter() {
