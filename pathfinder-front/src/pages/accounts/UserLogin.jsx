@@ -3,7 +3,7 @@ import "./UserLogin.scss"
 import { ConfigProvider } from "antd";
 import { Button, Form, Input } from 'antd';
 import axios from "axios";
-
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
 const loginUrl = "http://127.0.0.1:8000/api/accounts/dj-rest-auth/login/";
 
@@ -53,11 +53,9 @@ function UserLogin() {
         }}>
           <Form
             form={form}
-            name="basic"
-            labelCol={{ span: 6 }}
-            wrapperCol={{ span: 15 }}
+            name="normal_login"
             style={{
-              maxWidth: 600,
+              maxWidth: "28%",
               margin: "auto",
             }}
             initialValues={{ remember: true }}
@@ -66,32 +64,38 @@ function UserLogin() {
             autoComplete="off"
           >
             <Form.Item
-              label="ID"
               name="username"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your username!',
+                  message: 'Please input your ID!',
                 },
               ]}
             >
-              <Input />
+              <Input
+                prefix={<UserOutlined className="site-form-item-icon" />}
+                placeholder="ID"
+              />
             </Form.Item>
 
             <Form.Item
-              label="Password"
               name="password"
               rules={[
                 {
                   required: true,
-                  message: 'Please input your password!',
+                  message: 'Please input your Password!',
                 },
               ]}
             >
-              <Input.Password />
+              <Input
+                prefix={<LockOutlined className="site-form-item-icon" />}
+                type="password"
+                placeholder="Password"
+              />
             </Form.Item>
 
-            <Form.Item wrapperCol={{ offset: 18 }}>
+            <Form.Item
+            >
               <ConfigProvider
                 theme={{
                   token: {
@@ -106,13 +110,14 @@ function UserLogin() {
                   type="primary"
                   htmlType="submit"
                   style={{
-                    width: "49%",
+                    width: "100%",
+                    display: "block",
                     borderColor: "rgba(255, 255, 255)",
-                    marginRight: "10px",
                   }}
                 >
-                  Submit
+                  Log in
                 </Button>
+                Or <a href="/registration" style={{ color: "rgba(228, 122, 58)" }}>register now!</a>
               </ConfigProvider>
             </Form.Item>
           </Form>
