@@ -3,9 +3,11 @@ import Modal from "react-modal";
 import { Button, FloatButton } from "antd";
 import "./RtImageModal.scss";
 import { PlusOutlined, DeleteOutlined, EyeOutlined, SaveOutlined } from "@ant-design/icons";
+import axios from "axios";
 
 const RtImageModalContext = createContext();
 let id_cnt = 0;
+const apiUrl = "http://127.0.0.1:8000/api/defects/"
 
 export const useRtModal = () => useContext(RtImageModalContext);
 
@@ -28,6 +30,8 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     const [currentBox, setCurrentBox] = useState(null);
 
     const [boxes, setBoxes] = useState([]);
+    const [deletedBoxes, setDeletedBoxes] = useState([]);
+    const [addedBoxes, setAddedBoxes] = useState([]);
     const [currentDefectType, setDefectType] = useState('slag');
     const imageRef = useRef(null);
 
@@ -39,10 +43,31 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         const boxes = initialBoxes.map(box => ({
             ...box,
             id: id_cnt++,
+            isOriginal: true,
         }));
 
         setBoxes(boxes);
     }, []);
+
+    const saveDefects = async () => {
+        addedBoxes.forEach(box => {
+            axios.post(apiUrl, {
+                "rt_Image_id": rtImage.id,
+                "expert_defect_set": boxes.filter(box => box.isOriginal),
+            },
+                { withCredentials: true }
+            );
+        });
+        deletedBoxes.forEach(box => {
+            axios.delete(apiUrl + deletedBoxes + "/", {
+                "image": rtImage.id,
+                "expert_defect_set": boxes.filter(box => box.isOriginal),
+            },
+                { withCredentials: true }
+            );
+        });
+    }
+
 
     const getCoordinates = (e) => {
         const rect = imageRef.current.getBoundingClientRect();
@@ -90,8 +115,12 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     }, [currentMode, currentBox, currentDefectType]);
 
     const deleteBox = (boxId) => {
-        if (currentMode === 'delete')
-            setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== boxId));
+        if (currentMode === 'delete') {
+            if (boxes.find(box => box.id === boxId)?.isOriginal) {
+                setDeletedBoxes(prevDeletedBoxes => [...prevDeletedBoxes, boxId]);
+                setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== boxId));
+            }
+        }
     };
 
     useEffect(() => {
