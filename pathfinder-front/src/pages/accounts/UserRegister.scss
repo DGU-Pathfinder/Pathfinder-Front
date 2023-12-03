@@ -1,0 +1,47 @@
+.register-pathfinder-main {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-right: 20.5%;
+  margin-top: 5%;
+}
+
+.register-pathfinder-logo {
+  height: 55px;
+  width: 60px;
+  background-image: url('../../assets/png/hanwha_logo.png');
+  background-size: cover;
+  display: block;
+  margin-right: 1%;
+}
+
+.register-pathfinder-title {
+  display: block;
+  color: rgba(228, 122, 58);
+  font-size: 45px;
+  font-weight: bold;
+  margin: 0 0 0 0;
+}
+
+.register-pathfinder-subtitle {
+  display: block;
+  color: #FBB584;
+  font-size: 25px;
+  font-weight: bold;
+  margin: 0 0 2% 31.5%;
+}
+
+.id-check-button:hover,
+.register-button:hover {
+  border-color: rgba(228, 122, 58) !important;
+}
+
+input::placeholder {
+  color: #888888 !important;
+}
+
+// #registration_last_name::placeholder,
+// # {
+// color: #888888;
+// }

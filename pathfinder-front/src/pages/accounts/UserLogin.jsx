@@ -94,8 +94,7 @@ function UserLogin() {
               />
             </Form.Item>
 
-            <Form.Item
-            >
+            <Form.Item>
               <ConfigProvider
                 theme={{
                   token: {
