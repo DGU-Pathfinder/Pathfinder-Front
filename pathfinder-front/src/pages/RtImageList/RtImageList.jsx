@@ -6,11 +6,7 @@ import Filter from "../../components/RtImageList/Filter"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
 import "./RtImageList.scss"
 
-<<<<<<< Updated upstream
-let apiUrl = "http://127.0.0.1:8000/api/rt-images/";
-=======
-const apiUrl = "http://localhost:8000/api/rt-images/";
->>>>>>> Stashed changes
+const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
 function RtImageList() {
@@ -49,10 +45,11 @@ function RtImageList() {
                 }
             }}>
                 <Filter />
-                onChange={onChange}
             </ConfigProvider>
             <div className="rt-images-grid">
-                <Row style={{ rowGap: "0px" }} >
+                <Row
+                    style={{ rowGap: "0px" }}
+                >
                     {rtImageList.map(rtImage => (
                         <Col className="each-grid" span={12} key={rtImage.pk}>
                             <Link
@@ -67,7 +64,13 @@ function RtImageList() {
                 </Row>
             </div>
 
-            <ConfigProvider theme={{ token: { colorText: '#909090' }, }} >
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorText: '#909090'
+                    },
+                }}
+            >
                 <Pagination
                     current={current}
                     onChange={onChange}
@@ -85,6 +88,7 @@ function RtImageList() {
             </ConfigProvider>
         </div >
     );
+
 }
 
 export default RtImageList;
