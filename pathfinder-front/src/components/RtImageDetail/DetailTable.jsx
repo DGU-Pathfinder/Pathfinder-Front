@@ -25,6 +25,8 @@ const columns = [
   },
 ];
 
+// let key_id = 0;
+
 function makeDataForTable(data_set, analyzer) {
   let data = [];
   let slag_cnt = 0;
@@ -35,6 +37,7 @@ function makeDataForTable(data_set, analyzer) {
     return 0;
   else if (data_set === "no expert data" || data_set === "no ai data")
     return {
+      // key: key_id++,
       key: '1',
       Analyzer: analyzer,
       slag: '-',
@@ -51,6 +54,7 @@ function makeDataForTable(data_set, analyzer) {
       others_cnt += 1;
   }
   data = {
+    // key: key_id++,
     key: '1',
     Analyzer: analyzer,
     slag: slag_cnt,
