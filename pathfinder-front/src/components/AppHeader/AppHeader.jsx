@@ -2,7 +2,11 @@ import React from "react";
 import "./AppHeader.scss";
 import { Layout, Menu, Button } from "antd";
 import { PictureOutlined, AimOutlined, UserOutlined } from '@ant-design/icons';
+import axios from "axios";
+
 const { Header } = Layout;
+
+const apiUrl = "http://127.0.0.1:8000/api/accounts/dj-rest-auth/logout/";
 
 const menuItems = [
   {
@@ -43,6 +47,19 @@ function createItemsFromMenu(menuItem) {
 }
 
 
+const logoutApi = () => {
+  axios.post(apiUrl, {}, { withCredentials: true })
+    .then((response) => {
+      console.log(response);
+      alert("Logout Success");
+      window.location.href = "/login";
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
+
+
 function AppHeader() {
   const itemStyle = { marginRight: '10px' };
   return (
@@ -77,7 +94,7 @@ function AppHeader() {
           width: '40%',
         }}
       />
-      <Button className="logout-button" type="link">
+      <Button className="logout-button" type="link" onClick={logoutApi}>
         LOGOUT</Button>
     </Header>
   )
