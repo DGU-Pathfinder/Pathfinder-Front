@@ -1,9 +1,9 @@
-import React, { useContext, useState, useEffect } from "react"
+import React from "react"
 import "./UserLogin.scss"
 import { ConfigProvider } from "antd";
 import { Button, Form, Input } from 'antd';
 import axios from "axios";
-import TokenContext from "../../components/JwtAuth/TokenContext";
+
 
 const loginUrl = "http://127.0.0.1:8000/api/accounts/dj-rest-auth/login/";
 
@@ -13,10 +13,6 @@ const onFinishFailed = (errorInfo) => {
 
 function UserLogin() {
     const [form] = Form.useForm();
-    const {
-        accessToken, setAccessToken,
-        refreshToken, setRefreshToken
-    } = useContext(TokenContext);
     const onFinish = async (values) => {
         console.log('User Input :', values);
         try {
@@ -41,18 +37,6 @@ function UserLogin() {
 
     };
 
-    useEffect(() => {
-        if (accessToken) {
-            console.log("accessToken : ", accessToken);
-            setAccessToken(accessToken);
-        }
-
-        if (refreshToken) {
-            console.log("refreshToken : ", refreshToken);
-            setAccessToken(refreshToken);
-        }
-    }, [accessToken, refreshToken]);
-
     return (
         <div className="user-login">
             <div className="pathfinder-main">
@@ -64,32 +48,19 @@ function UserLogin() {
                     token: {
                         colorText: 'rgba(255, 255, 255)',
                         colorBorder: 'rgba(228, 112, 58)',
-                        // colorInfoBg: 'rgba(255, 255, 255, 0.1)',
                         colorBgContainer: '#121212',
                     },
-                    components: {
-                        FormItem: {
-                            // labelColor: 'rgba(228, 112, 58)',
-
-                        },
-                    }
                 }}>
                     <Form
                         form={form}
                         name="basic"
-                        labelCol={{
-                            span: 6,
-                        }}
-                        wrapperCol={{
-                            span: 15,
-                        }}
+                        labelCol={{ span: 6 }}
+                        wrapperCol={{ span: 15 }}
                         style={{
                             maxWidth: 600,
                             margin: "auto",
                         }}
-                        initialValues={{
-                            remember: true,
-                        }}
+                        initialValues={{ remember: true }}
                         onFinish={onFinish}
                         onFinishFailed={onFinishFailed}
                         autoComplete="off"

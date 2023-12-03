@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
 import { ConfigProvider, message, Upload } from 'antd';
 import './UploadImage.scss';
 
 
 const { Dragger } = Upload;
+
 const props = {
     name: 'image',
     multiple: true,
@@ -29,9 +30,7 @@ const UploadImage = () => (
 
     <ConfigProvider
         theme={{
-            token: {
-                colorText: 'white',
-            },
+            token: { colorText: 'white', },
         }}
     >
         <div className="body-container">
@@ -48,11 +47,7 @@ const UploadImage = () => (
                     </p>
                     <p
                         className="ant-upload-text"
-                        style={{
-                            color: "white",
-
-
-                        }}
+                        style={{ color: "white", }}
                     >
                         Click or drag RT images to this area to upload
                     </p>
