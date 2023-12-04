@@ -37,7 +37,6 @@ function RtImageList() {
     console.log("Rt Image List mounted.");
   }, [current]);
 
-<<<<<<< HEAD
     return (
         <div className="rt-page">
             <ConfigProvider theme={{
@@ -89,45 +88,6 @@ function RtImageList() {
             </ConfigProvider>
         </div >
     );
-
-=======
-  return (
-    <div className="rt-page">
-      <div className="rt-images-grid">
-        <Row style={{ rowGap: "0px" }} >
-          {rtImageList.map(rtImage => (
-            <Col className="each-grid" span={12} key={rtImage.pk}>
-              <Link
-                key={rtImage.pk}
-                to={`/rt-image/${rtImage.pk}`}
-                style={{ color: "white" }}
-              >
-                <RtImage rtImage={rtImage} />
-              </Link>
-            </Col>
-          ))}
-        </Row>
-      </div>
-
-      <ConfigProvider theme={{ token: { colorText: '#909090' }, }} >
-        <Pagination
-          current={current}
-          onChange={onChange}
-          defaultCurrent={1}
-          defaultPageSize={6}
-          pageSize={6}
-          style={{
-            textAlign: "center",
-            margin: "3%",
-          }}
-          total={data.count}
-          showSizeChanger={false}
-        >
-        </Pagination>
-      </ConfigProvider>
-    </div >
-  );
->>>>>>> upstream/dev
 }
 
 export default RtImageList;
