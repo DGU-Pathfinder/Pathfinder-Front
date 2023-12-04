@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { UserOutlined, BarsOutlined } from '@ant-design/icons';
 import { Checkbox , Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
 import dayjs from 'dayjs';
-import Axios from "axios";
+import axios from "axios";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './Filter.scss'
 dayjs.extend(customParseFormat);
@@ -16,11 +16,16 @@ function Filter() {
   const { useToken } = theme;
   const [uploader, setuploader] = React.useState();
   const [modifier, setmodifier] = React.useState();
+  const [startDateString, setStartDateString] = useState('');
+  const [endDateString, setEndDateString] = useState('');
   const [open, setOpen] = useState(false);
   const { token } = useToken();
+
   const onCalendarChange = (dates, dateStrings) => {
     console.log('Selected Dates:', dates);
     console.log('Formatted Date Strings:', dateStrings);
+    setStartDateString(dateStrings[0]);
+    setEndDateString(dateStrings[1]);
   };
   const onChange = (e) => {
     console.log('checked = ${e.target.checked}');
@@ -87,9 +92,17 @@ function Filter() {
     }
   };
 
-  //   React.useEffect(() => {
-  //   setValues(initialValues);
-  // }, [initialValues]);
+  axios.get(apiUrl, {
+    params: {
+      date : startDateString+endDateString,
+      uploader : uploader,
+      modifier: modifier
+    }
+  }).then(response => {
+    console.log(response.data);
+  }).catch(error => {
+    console.log(error.response);
+  });
   
   return (
     <form
