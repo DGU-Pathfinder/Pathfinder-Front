@@ -15,9 +15,8 @@ function getBorderColor(defectType) {
   }
 }
 
-function RtImageDetailData({ rtImage }) {
+function RtImageDetailData({ rtImage, defects }) {
   const { image, image_name } = rtImage;
-  const defects = rtImage?.ai_model?.ai_defect_set || [];
   const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
   const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
   const imageRef = useRef(null);
