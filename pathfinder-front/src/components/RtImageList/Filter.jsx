@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { UserOutlined, BarsOutlined } from '@ant-design/icons';
 import { Checkbox , Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
 import dayjs from 'dayjs';
@@ -16,10 +16,15 @@ function Filter() {
   const { useToken } = theme;
   const [uploader, setuploader] = React.useState();
   const [modifier, setmodifier] = React.useState();
+  const [Expertcheck, setExpertcheck] = React.useState(false);
   const [startDateString, setStartDateString] = useState('');
   const [endDateString, setEndDateString] = useState('');
   const [open, setOpen] = useState(false);
   const { token } = useToken();
+
+  // useEffect(() => {
+
+  // }, [uploader, modifier, startDateString, endDateString]);
 
   const onCalendarChange = (dates, dateStrings) => {
     console.log('Selected Dates:', dates);
@@ -28,11 +33,7 @@ function Filter() {
     setEndDateString(dateStrings[1]);
   };
   const onChange = (e) => {
-    console.log('checked = ${e.target.checked}');
-  };
-
-  const onClick = (e) => {
-    console.log('click', e);
+    setExpertcheck(e.target.checked);
   };
 
   const items = [
@@ -52,8 +53,8 @@ function Filter() {
       key: '2',
       label: (
         <Input Input size="large" placeholder="uploader" prefix={<UserOutlined />} 
-          onChange={({ target: uploader  }) =>
-          setuploader(uploader)
+          onChange={({ target: uploader }) =>
+          setuploader(uploader.value)
           }
         />
       ),
@@ -63,7 +64,7 @@ function Filter() {
       label: (
         <Input Input size="large" placeholder="modifier" prefix={<UserOutlined />} 
           onChange={({ target: modifier  }) =>
-          setmodifier(modifier)
+          setmodifier(modifier.value)
         }
         />
       ),
@@ -71,7 +72,7 @@ function Filter() {
     {
       key: '4',
       label: (
-        <Checkbox onChange={onChange}>Expert Check</Checkbox>
+        <Checkbox checked={Expertcheck} onChange={onChange}>Expert Check</Checkbox>
       ),
     },
   ];
@@ -84,7 +85,6 @@ function Filter() {
   const menuStyle = {
     boxShadow: 'none',
   };
-  console.log(uploader,modifier);
 
   const handleOpenChange = (nextOpen, info) => {
     if (info.source === 'trigger' || nextOpen) {
@@ -92,27 +92,28 @@ function Filter() {
     }
   };
 
-  axios.get(apiUrl, {
-    params: {
-      date : startDateString+endDateString,
-      uploader : uploader,
-      modifier: modifier
-    }
-  }).then(response => {
-    console.log(response.data);
-  }).catch(error => {
-    console.log(error.response);
-  });
-  
+  const filterRequest = () => {
+    console.log(uploader);
+    axios.get(apiUrl, {
+      params: {
+        date : startDateString+endDateString,
+        uploader : uploader,
+        modifier: modifier,
+        Expertcheck:Expertcheck
+      },
+      withCredentials: true
+    },
+    ).then(response => {
+      console.log(response.data);
+    }).catch(error => {
+      console.log(error.response);
+    });
+  };
+
+ 
   return (
-    <form
-      // onSubmit={(event) => {
-      //   event.preventDefault();
-      //   onSubmit(values);
-      // }}
-    >
     <Dropdown
-      onClick={onClick}
+      trigger={['click']}
       menu={{
         items,
       }}
@@ -133,18 +134,17 @@ function Filter() {
               padding: 8,
             }}
           >
-            <Button type="primary" >Search</Button>
+            <Button type="primary"  onClick={filterRequest}>Search</Button>
           </Space>
         </div>
       )}
     >        
     <Space>
-      <Button>
-        <BarsOutlined  style={{ fontSize: '100%'}} /> Filter
+      <Button className='button' type="primary" >
+        <BarsOutlined   /> Filter
       </Button>
     </Space>
     </Dropdown>
-  </form>
   );
 }
 export default Filter;
