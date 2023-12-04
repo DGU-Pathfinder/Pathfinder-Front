@@ -39,7 +39,7 @@ function RtImageDetail() {
   }
 
   const aiDefects = rtImage?.ai_model?.ai_defect_set || "no ai data"
-  const expertDefects = rtImage?.expert?.[0]?.expert_defect_set || "no expert data";
+  const expertDefects = rtImage?.expert?.expert_defect_set || "no expert data";
   console.log("aiDefects : ", aiDefects);
 
   return (
@@ -56,7 +56,7 @@ function RtImageDetail() {
       <Row align="middle">
         <Col span={18}>
           <div className='rt-image-ai-detail'>
-            <RtImageDetailData key={1} rtImage={rtImage} />
+            <RtImageDetailData key={1} rtImage={rtImage} defects={aiDefects} />
           </div>
         </Col>
         <Col span={6}>
@@ -82,10 +82,7 @@ function RtImageDetail() {
       <Row align="middle">
         <Col span={18}>
           <div className="rt-image-expert-detail">
-            <RtImageDetailData
-              key={2}
-              rtImage={rtImage}
-            />
+            <RtImageDetailData key={2} rtImage={rtImage} defects={expertDefects === "no expert data" ? aiDefects : expertDefects} />
           </div>
         </Col>
         <Col span={6}>

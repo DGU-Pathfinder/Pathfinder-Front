@@ -7,7 +7,7 @@ import axios from "axios";
 
 const RtImageModalContext = createContext();
 let id_cnt = 0;
-const apiUrl = "http://127.0.0.1:8000/api/defects/"
+const apiUrl = "http://127.0.0.1:8000/api/expert-defects/"
 
 export const useRtModal = () => useContext(RtImageModalContext);
 
@@ -49,24 +49,39 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     setBoxes(boxes);
   }, []);
 
-  const saveDefects = async () => {
+  const saveDefects = () => {
     addedBoxes.forEach(box => {
+      console.log("box : ", box);
+      console.log("rtImage : ", rtImage.pk);
       axios.post(apiUrl, {
-        "rt_Image_id": rtImage.id,
-        "expert_defect_set": boxes.filter(box => box.isOriginal),
+        "rt_image_id": rtImage.pk,
+        "modified_date": new Date().toISOString(),
+        "defect_type": box['defect_type'],
+        "xmax": box['xmax'],
+        "xmin": box['xmin'],
+        "ymax": box['ymax'],
+        "ymin": box['ymin'],
       },
         { withCredentials: true }
-      );
+      ).then((response) => {
+        console.log("response : ", response);
+      }).catch((error) => {
+        console.log(error.response);
+      });
+
     });
     deletedBoxes.forEach(box => {
-      axios.delete(apiUrl + deletedBoxes + "/", {
-        "image": rtImage.id,
-        "expert_defect_set": boxes.filter(box => box.isOriginal),
-      },
-        { withCredentials: true }
-      );
+      if (box['isOriginal'] === true) {
+        axios.delete(apiUrl + box['pk'] + "/",
+          { withCredentials: true }
+        ).then((response) => {
+          console.log("response : ", response);
+        }).catch((error) => {
+          console.log(error.response);
+        });
+      }
     });
-  }
+  };
 
 
   const getCoordinates = (e) => {
@@ -107,6 +122,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
 
           console.log("completedBox : ", completedBox);
           setBoxes(prevBoxes => [...prevBoxes, completedBox]);
+          setAddedBoxes(prevAddedBoxes => [...prevAddedBoxes, completedBox]);
           setCurrentBox(null);
         }
         break;
@@ -237,7 +253,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
           icon={
             <SaveOutlined style={{ color: 'red' }} />
           }
-        // onClick={() => saveDefects()}
+          onClick={() => saveDefects()}
         />
         <FloatButton
           icon={
