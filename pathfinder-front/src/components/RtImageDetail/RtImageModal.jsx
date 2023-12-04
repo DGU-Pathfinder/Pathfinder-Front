@@ -5,6 +5,7 @@ import "./RtImageModal.scss";
 import { PlusOutlined, DeleteOutlined, EyeOutlined, SaveOutlined } from "@ant-design/icons";
 import axios from "axios";
 
+
 const RtImageModalContext = createContext();
 let id_cnt = 0;
 const apiUrl = "http://127.0.0.1:8000/api/expert-defects/"
@@ -46,6 +47,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       isOriginal: true,
     }));
 
+    console.log("initialBoxes modified : ", boxes);
     setBoxes(boxes);
   }, []);
 
@@ -70,17 +72,17 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       });
 
     });
-    deletedBoxes.forEach(box => {
-      if (box['isOriginal'] === true) {
-        axios.delete(apiUrl + box['pk'] + "/",
-          { withCredentials: true }
-        ).then((response) => {
-          console.log("response : ", response);
-        }).catch((error) => {
-          console.log(error.response);
-        });
-      }
+    console.log("deletedBoxes : ", deletedBoxes);
+    deletedBoxes.forEach(boxPk => {
+      axios.delete(apiUrl + boxPk + "/",
+        { withCredentials: true }
+      ).then((response) => {
+        console.log("response : ", response);
+      }).catch((error) => {
+        console.log(error.response);
+      });
     });
+    // window.location.reload();
   };
 
 
@@ -101,8 +103,6 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
           console.log("mousedown");
           const newBox = {
             id: id_cnt++,
-            // modifier: 'user',
-            // modifier_name: 'User',
             modified_date: new Date().toISOString(),
             defect_type: currentDefectType,
             xmin: coords.x,
@@ -132,11 +132,17 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
 
   const deleteBox = (boxId) => {
     if (currentMode === 'delete') {
-      if (boxes.find(box => box.id === boxId)?.isOriginal) {
-        setDeletedBoxes(prevDeletedBoxes => [...prevDeletedBoxes, boxId]);
+      const temp = boxes.find(box => box.id === boxId)
+      if (temp?.isOriginal) {
+        setDeletedBoxes(prevDeletedBoxes => [...prevDeletedBoxes, temp.pk]);
         setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== boxId));
       }
     }
+  };
+
+  const handleRequestClose = () => {
+    window.location.reload();
+    onRequestClose();
   };
 
   useEffect(() => {
@@ -156,7 +162,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     <Modal
       ariaHideApp={false}
       isOpen={isOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={handleRequestClose}
       style={{
         overlay: { backgroundColor: "rgba(0, 0, 0, 0.75)", },
         content: {
@@ -165,7 +171,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         },
       }}
     >
-      <div className="rt-image-modal-header">
+      {/* <div className="rt-image-modal-header">
         <Button
           className="rt-image-modal-save-button"
           onClick={onRequestClose}
@@ -179,7 +185,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         >
           save and close
         </Button>
-      </div>
+      </div> */}
       <div className="rt-image-modal-body"
         style={{ position: 'relative' }}>
         <img
