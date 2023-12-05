@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { UserOutlined, BarsOutlined } from '@ant-design/icons';
 import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
+
 import dayjs from 'dayjs';
 import axios from "axios";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -12,16 +13,20 @@ const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 function Filter() {
   const { RangePicker } = DatePicker;
-  const dateFormat = 'YYYY/MM/DD';
+  const dateFormat = 'YYYY-MM-DD';
   const { useToken } = theme;
-  const [uploader, setuploader] = React.useState();
-  const [modifier, setmodifier] = React.useState();
-  const [Expertcheck, setExpertcheck] = React.useState(false);
+  const [uploader, setuploader] = useState();
+  const [modifier, setmodifier] = useState();
+  const [Expertcheck, setExpertcheck] = useState([]);
   const [startDateString, setStartDateString] = useState('');
   const [endDateString, setEndDateString] = useState('');
   const [open, setOpen] = useState(false);
   const { token } = useToken();
-
+  const checkboxOptions = [
+    { label: 'Yes', value: 'true' },
+    { label: 'No', value: 'false' },
+  ];
+  
   // useEffect(() => {
 
   // }, [uploader, modifier, startDateString, endDateString]);
@@ -32,8 +37,9 @@ function Filter() {
     setStartDateString(dateStrings[0]);
     setEndDateString(dateStrings[1]);
   };
-  const onChange = (e) => {
-    setExpertcheck(e.target.checked);
+  
+  const onChange = (checkedValues) => {
+    setExpertcheck(checkedValues) 
   };
 
   const items = [
@@ -71,7 +77,12 @@ function Filter() {
     {
       key: '4',
       label: (
-        <Checkbox checked={Expertcheck} onChange={onChange}>Expert Check</Checkbox>
+        <div>
+          <p className='checkbox'>
+            Expert Check
+            </p>
+          <Checkbox.Group options={checkboxOptions} value={Expertcheck} onChange={onChange}>Expert Check</Checkbox.Group>
+        </div>
       ),
     },
   ];
@@ -100,7 +111,7 @@ function Filter() {
         upload_date_befor: endDateString,
         uploader: uploader,
         modifier: modifier,
-        expert_check: Expertcheck
+        expert_check: Expertcheck.length == 2 ? null : Expertcheck[0]
       },
       withCredentials: true
     },
