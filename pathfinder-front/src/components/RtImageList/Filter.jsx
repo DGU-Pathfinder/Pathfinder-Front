@@ -44,7 +44,6 @@ function Filter() {
           <RangePicker
             format={dateFormat}
             onCalendarChange={onCalendarChange}
-
           />
         </Space>
       ),
@@ -82,6 +81,7 @@ function Filter() {
     borderRadius: token.borderRadiusLG,
     boxShadow: token.boxShadowSecondary,
   };
+
   const menuStyle = {
     boxShadow: 'none',
   };
@@ -109,7 +109,6 @@ function Filter() {
       console.log(error.response);
     });
   };
-
 
   return (
     <Dropdown
