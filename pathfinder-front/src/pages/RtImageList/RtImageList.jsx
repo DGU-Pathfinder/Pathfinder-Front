@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Axios from "axios";
 import RtImage from "../../components/RtImageList/RtImage"
+import Filter from "../../components/RtImageList/Filter"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
 import "./RtImageList.scss"
 
-let apiUrl = "http://127.0.0.1:8000/api/rt-images/";
+const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
 function RtImageList() {
@@ -36,42 +37,57 @@ function RtImageList() {
     console.log("Rt Image List mounted.");
   }, [current]);
 
-  return (
-    <div className="rt-page">
-      <div className="rt-images-grid">
-        <Row style={{ rowGap: "0px" }} >
-          {rtImageList.map(rtImage => (
-            <Col className="each-grid" span={12} key={rtImage.pk}>
-              <Link
-                key={rtImage.pk}
-                to={`/rt-image/${rtImage.pk}`}
-                style={{ color: "white" }}
-              >
-                <RtImage rtImage={rtImage} />
-              </Link>
-            </Col>
-          ))}
-        </Row>
-      </div>
+    return (
+        <div className="rt-page">
+            <ConfigProvider theme={{
+                token: {
+                    colorPrimary: '#121212'
+                }
+            }}>
+                <Filter />
+            </ConfigProvider>
+            <div className="rt-images-grid">
+                <Row
+                    style={{ rowGap: "0px" }}
+                >
+                    {rtImageList.map(rtImage => (
+                        <Col className="each-grid" span={12} key={rtImage.pk}>
+                            <Link
+                                key={rtImage.pk}
+                                to={'/rt-image/${rtImage.pk}'}
+                                style={{ color: "white" }}
+                            >
+                                <RtImage rtImage={rtImage} />
+                            </Link>
+                        </Col>
+                    ))}
+                </Row>
+            </div>
 
-      <ConfigProvider theme={{ token: { colorText: '#909090' }, }} >
-        <Pagination
-          current={current}
-          onChange={onChange}
-          defaultCurrent={1}
-          defaultPageSize={6}
-          pageSize={6}
-          style={{
-            textAlign: "center",
-            margin: "3%",
-          }}
-          total={data.count}
-          showSizeChanger={false}
-        >
-        </Pagination>
-      </ConfigProvider>
-    </div >
-  );
+            <ConfigProvider
+                theme={{
+                    token: {
+                        colorText: '#909090'
+                    },
+                }}
+            >
+                <Pagination
+                    current={current}
+                    onChange={onChange}
+                    defaultCurrent={1}
+                    defaultPageSize={6}
+                    pageSize={6}
+                    style={{
+                        textAlign: "center",
+                        margin: "3%",
+                    }}
+                    total={data.count}
+                    showSizeChanger={false}
+                >
+                </Pagination>
+            </ConfigProvider>
+        </div >
+    );
 }
 
 export default RtImageList;
