@@ -96,10 +96,11 @@ function Filter() {
     console.log(uploader);
     axios.get(apiUrl, {
       params: {
-        date: startDateString + endDateString,
+        upload_date_after: startDateString,
+        upload_date_befor: endDateString,
         uploader: uploader,
         modifier: modifier,
-        Expertcheck: Expertcheck
+        expert_check: Expertcheck
       },
       withCredentials: true
     },
