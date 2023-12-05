@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserOutlined, BarsOutlined } from '@ant-design/icons';
-import { Checkbox , Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
+import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
 import dayjs from 'dayjs';
 import axios from "axios";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -41,20 +41,20 @@ function Filter() {
       key: '1',
       label: (
         <Space direction="vertical" size={12}>
-        <RangePicker
-        format={dateFormat}
-        onCalendarChange={onCalendarChange}
+          <RangePicker
+            format={dateFormat}
+            onCalendarChange={onCalendarChange}
 
-      />
-    </Space>
+          />
+        </Space>
       ),
     },
     {
       key: '2',
       label: (
-        <Input Input size="large" placeholder="uploader" prefix={<UserOutlined />} 
+        <Input Input size="large" placeholder="uploader" prefix={<UserOutlined />}
           onChange={({ target: uploader }) =>
-          setuploader(uploader.value)
+            setuploader(uploader.value)
           }
         />
       ),
@@ -62,10 +62,10 @@ function Filter() {
     {
       key: '3',
       label: (
-        <Input Input size="large" placeholder="modifier" prefix={<UserOutlined />} 
-          onChange={({ target: modifier  }) =>
-          setmodifier(modifier.value)
-        }
+        <Input Input size="large" placeholder="modifier" prefix={<UserOutlined />}
+          onChange={({ target: modifier }) =>
+            setmodifier(modifier.value)
+          }
         />
       ),
     },
@@ -96,10 +96,10 @@ function Filter() {
     console.log(uploader);
     axios.get(apiUrl, {
       params: {
-        date : startDateString+endDateString,
-        uploader : uploader,
+        date: startDateString + endDateString,
+        uploader: uploader,
         modifier: modifier,
-        Expertcheck:Expertcheck
+        Expertcheck: Expertcheck
       },
       withCredentials: true
     },
@@ -110,7 +110,7 @@ function Filter() {
     });
   };
 
- 
+
   return (
     <Dropdown
       trigger={['click']}
@@ -134,16 +134,16 @@ function Filter() {
               padding: 8,
             }}
           >
-            <Button type="primary"  onClick={filterRequest}>Search</Button>
+            <Button type="primary" onClick={filterRequest}>Search</Button>
           </Space>
         </div>
       )}
-    >        
-    <Space>
-      <Button className='button' type="primary" >
-        <BarsOutlined   /> Filter
-      </Button>
-    </Space>
+    >
+      <Space>
+        <Button className='button' type="primary" >
+          <BarsOutlined />Filter
+        </Button>
+      </Space>
     </Dropdown>
   );
 }
