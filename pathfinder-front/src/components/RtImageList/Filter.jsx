@@ -5,9 +5,8 @@ import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './Filter.scss'
-dayjs.extend(customParseFormat);
 
-const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
+dayjs.extend(customParseFormat);
 
 
 function Filter({ onQueryChange }) {
