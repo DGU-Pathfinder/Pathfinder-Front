@@ -81,7 +81,7 @@ function RtImage({ rtImage }) {
   const { image, image_name, ai_model, expert } = rtImage;
   const defects = ai_model?.ai_defect_set;
   const ai_model_data = makeDataForTable(ai_model?.ai_defect_set || "no ai data", "ai_defect_set", "AI");
-  const expert_data = makeDataForTable(expert?.[0]?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
+  const expert_data = makeDataForTable(expert?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
   const [originalSize, setOriginalSize] = useState({ width: 0, height: 0 });
   const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
   const imageRef = useRef(null);
