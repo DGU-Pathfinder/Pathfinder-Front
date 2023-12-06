@@ -26,7 +26,7 @@ function Filter() {
     { label: 'Yes', value: 'true' },
     { label: 'No', value: 'false' },
   ];
-  
+
   // useEffect(() => {
 
   // }, [uploader, modifier, startDateString, endDateString]);
@@ -37,9 +37,9 @@ function Filter() {
     setStartDateString(dateStrings[0]);
     setEndDateString(dateStrings[1]);
   };
-  
+
   const onChange = (checkedValues) => {
-    setExpertcheck(checkedValues) 
+    setExpertcheck(checkedValues)
   };
 
   const items = [
@@ -80,7 +80,7 @@ function Filter() {
         <div>
           <p className='checkbox'>
             Expert Check
-            </p>
+          </p>
           <Checkbox.Group options={checkboxOptions} value={Expertcheck} onChange={onChange}>Expert Check</Checkbox.Group>
         </div>
       ),
