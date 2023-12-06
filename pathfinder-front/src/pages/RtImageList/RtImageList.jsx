@@ -47,6 +47,10 @@ function RtImageList() {
         setData(data);
       })
       .catch((error) => {
+        if (error.response.status === 403) {
+          // alert("로그인이 필요합니다.");
+          window.location.href = "/login";
+        }
         console.log(error);
       });
     console.log("Rt Image List mounted.");
