@@ -34,7 +34,7 @@ function makeDataForTable(data_set, name, analyzer) {
   let porosity_cnt = 0;
   let others_cnt = 0;
 
-  console.log("data_set : ", data_set);
+  // console.log("data_set : ", data_set);
 
   if (data_set === null)
     return 0;
