@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Axios from "axios";
+import axios from "axios";
 import RtImage from "../../components/RtImageList/RtImage"
 import Filter from "../../components/RtImageList/Filter"
 import { Col, Row, Pagination, ConfigProvider } from "antd";
@@ -10,6 +10,7 @@ const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
 function RtImageList() {
+  const [query, setQuery] = useState('');
   const [rtImageList, setRtImageList] = useState([]);
   const [data, setData] = useState([]);
   const [current, setCurrent] = useState(1);
@@ -18,24 +19,37 @@ function RtImageList() {
     console.log(page);
   };
 
+  const handleQueryChange = (newQuery) => {
+    setQuery(newQuery);
+  };
+
+  
   useEffect(() => {
     let temp;
 
     temp = "?page=" + current;
+    console.log("query : ", query);
 
-    Axios.get(apiUrl + temp, { withCredentials: true })
+    axios.get(apiUrl + temp, {params: {
+      upload_date_after: query.startDateString,
+      upload_date_befor: query.endDateString,
+      uploader: query.uploader,
+      modifier: query.modifier,
+      expert_check: query.expert_check
+    },withCredentials: true })
       .then((response) => {
         const { data } = response;
         console.log("loaded response : ", response);
+        console.log("expert_check : ", query.expert_check);
+
         setRtImageList(data.results);
         setData(data);
       })
       .catch((error) => {
         console.log(error);
       });
-
     console.log("Rt Image List mounted.");
-  }, [current]);
+  }, [current,query]);
 
   return (
     <div className="rt-page">
@@ -44,7 +58,7 @@ function RtImageList() {
           colorPrimary: '#121212'
         }
       }}>
-        <Filter />
+        <Filter onQueryChange={handleQueryChange} />
       </ConfigProvider>
       <div className="rt-images-grid">
         <Row
