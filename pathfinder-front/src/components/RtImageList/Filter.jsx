@@ -3,7 +3,6 @@ import { UserOutlined, BarsOutlined } from '@ant-design/icons';
 import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
 
 import dayjs from 'dayjs';
-import axios from "axios";
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './Filter.scss'
 dayjs.extend(customParseFormat);
@@ -11,7 +10,14 @@ dayjs.extend(customParseFormat);
 const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
 
 
-function Filter() {
+function Filter({ onQueryChange }) {
+  const [localQuery, setLocalQuery] = useState({
+    upload_date_after: null,
+    upload_date_befor: null,
+    uploader: null,
+    modifier: null,
+    expert_check: null
+  });
   const { RangePicker } = DatePicker;
   const dateFormat = 'YYYY-MM-DD';
   const { useToken } = theme;
@@ -26,10 +32,6 @@ function Filter() {
     { label: 'Yes', value: 'true' },
     { label: 'No', value: 'false' },
   ];
-
-  // useEffect(() => {
-
-  // }, [uploader, modifier, startDateString, endDateString]);
 
   const onCalendarChange = (dates, dateStrings) => {
     console.log('Selected Dates:', dates);
@@ -104,23 +106,19 @@ function Filter() {
   };
 
   const filterRequest = () => {
-    console.log(uploader);
-    axios.get(apiUrl, {
-      params: {
-        upload_date_after: startDateString,
-        upload_date_before: endDateString,
-        uploader: uploader,
-        modifier: modifier,
-        expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
-      },
-      withCredentials: true
-    },
-    ).then(response => {
-      console.log(response.data);
-    }).catch(error => {
-      console.log(error.response);
-    });
+    setLocalQuery({
+      upload_date_after: startDateString,
+      upload_date_befor: endDateString,
+      uploader: uploader,
+      modifier: modifier,
+      expert_check: Expertcheck.length == 2 ? null : Expertcheck[0]
+    })
+    onQueryChange(localQuery);
   };
+
+  useEffect(() => {
+    onQueryChange(localQuery);
+  }, [localQuery, onQueryChange]);
 
   return (
     <Dropdown
@@ -145,7 +143,7 @@ function Filter() {
               padding: 8,
             }}
           >
-            <Button type="primary" onClick={filterRequest}>Search</Button>
+            <Button type="primary" onClick={filterRequest} >Search</Button>
           </Space>
         </div>
       )}
