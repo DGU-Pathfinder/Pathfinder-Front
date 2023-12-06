@@ -38,14 +38,24 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
 
   useEffect(() => {
     const initialBoxes = rtImage.expert ? rtImage.expert.expert_defect_set : (rtImage.ai_model?.ai_defect_set || []);
+    let boxes;
 
-    console.log("initialBoxes : ", initialBoxes);
-
-    const boxes = initialBoxes.map(box => ({
-      ...box,
-      id: id_cnt++,
-      isOriginal: true,
-    }));
+    if (rtImage?.expert === null && rtImage?.ai_model !== null) {
+      boxes = initialBoxes.map(box => ({
+        ...box,
+        id: id_cnt++,
+        isOriginal: true,
+        isAiDefect: true,
+      }));
+      setAddedBoxes(boxes);
+    } else {
+      boxes = initialBoxes.map(box => ({
+        ...box,
+        id: id_cnt++,
+        isOriginal: true,
+        isAiDefect: false,
+      }));
+    }
 
     console.log("initialBoxes modified : ", boxes);
     setBoxes(boxes);
@@ -70,8 +80,8 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       }).catch((error) => {
         console.log(error.response);
       });
-
     });
+
     console.log("deletedBoxes : ", deletedBoxes);
     deletedBoxes.forEach(boxPk => {
       axios.delete(apiUrl + boxPk + "/",
@@ -82,9 +92,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         console.log(error.response);
       });
     });
-    // window.location.reload();
   };
-
 
   const getCoordinates = (e) => {
     const rect = imageRef.current.getBoundingClientRect();
@@ -133,10 +141,11 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
   const deleteBox = (boxId) => {
     if (currentMode === 'delete') {
       const temp = boxes.find(box => box.id === boxId)
-      if (temp?.isOriginal) {
+      if (temp?.isOriginal && !temp?.isAiDefect)
         setDeletedBoxes(prevDeletedBoxes => [...prevDeletedBoxes, temp.pk]);
-        setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== boxId));
-      }
+
+      setAddedBoxes(prevAddedBoxes => prevAddedBoxes.filter(box => box.id !== boxId));
+      setBoxes(prevBoxes => prevBoxes.filter(box => box.id !== boxId));
     }
   };
 
