@@ -32,8 +32,6 @@ function Filter({ onQueryChange }) {
     { label: 'Yes', value: 'true' },
     { label: 'No', value: 'false' },
   ];
-  
-  
 
   const onCalendarChange = (dates, dateStrings) => {
     console.log('Selected Dates:', dates);
@@ -41,9 +39,9 @@ function Filter({ onQueryChange }) {
     setStartDateString(dateStrings[0]);
     setEndDateString(dateStrings[1]);
   };
-  
+
   const onChange = (checkedValues) => {
-    setExpertcheck(checkedValues) 
+    setExpertcheck(checkedValues)
   };
 
   const items = [
@@ -84,7 +82,7 @@ function Filter({ onQueryChange }) {
         <div>
           <p className='checkbox'>
             Expert Check
-            </p>
+          </p>
           <Checkbox.Group options={checkboxOptions} value={Expertcheck} onChange={onChange}>Expert Check</Checkbox.Group>
         </div>
       ),
