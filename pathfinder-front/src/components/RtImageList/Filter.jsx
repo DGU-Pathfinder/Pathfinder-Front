@@ -107,7 +107,7 @@ function Filter({ onQueryChange }) {
   const filterRequest = () => {
     setLocalQuery({
       upload_date_after: startDateString,
-      upload_date_befor: endDateString,
+      upload_date_before: endDateString,
       uploader: uploader,
       modifier: modifier,
       expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
