@@ -23,24 +23,25 @@ function RtImageList() {
     setQuery(newQuery);
   };
 
-  
   useEffect(() => {
     let temp;
 
     temp = "?page=" + current;
     console.log("query : ", query);
 
-    axios.get(apiUrl + temp, {params: {
-      upload_date_after: query.startDateString,
-      upload_date_befor: query.endDateString,
-      uploader: query.uploader,
-      modifier: query.modifier,
-      expert_check: query.expert_check
-    },withCredentials: true })
+    axios.get(apiUrl + temp, {
+      params: {
+        upload_date_after: query.startDateString,
+        upload_date_before: query.endDateString,
+        uploader: query.uploader,
+        modifier: query.modifier,
+        expert_check: query.expert_check
+      }, withCredentials: true
+    })
       .then((response) => {
         const { data } = response;
-        console.log("loaded response : ", response);
-        console.log("expert_check : ", query.expert_check);
+        // console.log("loaded response : ", response);
+        // console.log("expert_check : ", query.expert_check);
 
         setRtImageList(data.results);
         setData(data);
@@ -49,7 +50,7 @@ function RtImageList() {
         console.log(error);
       });
     console.log("Rt Image List mounted.");
-  }, [current,query]);
+  }, [current, query]);
 
   return (
     <div className="rt-page">
