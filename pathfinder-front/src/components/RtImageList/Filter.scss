@@ -1,9 +1,13 @@
-.button {
+.filter-button {
     font-weight: bold;
     font-Size: 20px;
 }
 
-.checkbox{
+.filter-button:hover {
+    border-color: rgba(228, 112, 58) !important;
+}
+
+.checkbox {
     font-weight: bold;
     font-Size: 20px;
     margin: 0;
