@@ -31,8 +31,8 @@ function RtImageList() {
 
     axios.get(apiUrl + temp, {
       params: {
-        upload_date_after: query.startDateString,
-        upload_date_before: query.endDateString,
+        upload_date_after: query.upload_date_after,
+        upload_date_before: query.upload_date_before,
         uploader: query.uploader,
         modifier: query.modifier,
         expert_check: query.expert_check
@@ -40,7 +40,7 @@ function RtImageList() {
     })
       .then((response) => {
         const { data } = response;
-        // console.log("loaded response : ", response);
+        console.log("loaded response : ", response);
         // console.log("expert_check : ", query.expert_check);
 
         setRtImageList(data.results);
