@@ -5,9 +5,8 @@ import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import './Filter.scss'
-dayjs.extend(customParseFormat);
 
-const apiUrl = "http://127.0.0.1:8000/api/rt-images/";
+dayjs.extend(customParseFormat);
 
 
 function Filter({ onQueryChange }) {
@@ -108,10 +107,10 @@ function Filter({ onQueryChange }) {
   const filterRequest = () => {
     setLocalQuery({
       upload_date_after: startDateString,
-      upload_date_befor: endDateString,
+      upload_date_before: endDateString,
       uploader: uploader,
       modifier: modifier,
-      expert_check: Expertcheck.length == 2 ? null : Expertcheck[0]
+      expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
     })
     onQueryChange(localQuery);
   };
@@ -148,11 +147,14 @@ function Filter({ onQueryChange }) {
         </div>
       )}
     >
-      <Space>
-        <Button className='button' type="primary" >
-          <BarsOutlined />Filter
-        </Button>
-      </Space>
+      <Button className='button' type="primary"
+        style={{
+          marginLeft: "90%",
+          marginTop: "1%"
+        }}
+      >
+        <BarsOutlined />Filter
+      </Button>
     </Dropdown>
   );
 }
