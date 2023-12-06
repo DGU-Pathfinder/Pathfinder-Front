@@ -150,11 +150,14 @@ function Filter() {
         </div>
       )}
     >
-      <Space>
-        <Button className='button' type="primary" >
-          <BarsOutlined />Filter
-        </Button>
-      </Space>
+      <Button className='button' type="primary"
+        style={{
+          marginLeft: "90%",
+          marginTop: "1%"
+        }}
+      >
+        <BarsOutlined />Filter
+      </Button>
     </Dropdown>
   );
 }
