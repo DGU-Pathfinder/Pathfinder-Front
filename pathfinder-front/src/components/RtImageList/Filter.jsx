@@ -110,7 +110,7 @@ function Filter({ onQueryChange }) {
       upload_date_befor: endDateString,
       uploader: uploader,
       modifier: modifier,
-      expert_check: Expertcheck.length == 2 ? null : Expertcheck[0]
+      expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
     })
     onQueryChange(localQuery);
   };
