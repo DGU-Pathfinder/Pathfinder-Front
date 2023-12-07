@@ -56,7 +56,6 @@ function UserLogin() {
             name="normal_login"
             style={{
               maxWidth: "28%",
-              margin: "auto",
             }}
             initialValues={{ remember: true }}
             onFinish={onFinish}

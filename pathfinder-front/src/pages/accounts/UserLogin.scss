@@ -1,3 +1,14 @@
+.user-login-form {
+  box-sizing: border-box;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+#normal_login {
+  width: 20%;
+}
+
 .pathfinder-main {
   box-sizing: border-box;
   justify-content: center;
@@ -19,7 +30,7 @@
   color: rgba(228, 122, 58);
   font-size: 100px;
   font-weight: bold;
-  margin: 5% 0 5% 0;
+  margin: 2% 0 2% 0;
 }
 
 #normal_login_password::placeholder,
