@@ -28,6 +28,9 @@ function RtImageDetail() {
         setRtImage(data);
       })
       .catch((error) => {
+        if (error.response.status === 403) {
+          window.location.href = "/login";
+        }
         console.log(error.response);
       });
 

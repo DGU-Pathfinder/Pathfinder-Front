@@ -147,10 +147,13 @@ function Filter({ onQueryChange }) {
         </div>
       )}
     >
-      <Button className='button' type="primary"
+      <Button className='filter-button' type="primary"
         style={{
           marginLeft: "90%",
-          marginTop: "1%"
+          marginTop: "2%",
+          borderColor: "rgba(255, 255, 255)",
+          width: "8%",
+          height: "1%",
         }}
       >
         <BarsOutlined />Filter
