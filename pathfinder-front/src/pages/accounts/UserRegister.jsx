@@ -1,9 +1,68 @@
-import React from "react"
+import React, { useState } from "react"
 import { Form, Input, Button, ConfigProvider } from 'antd';
 import "./UserRegister.scss"
+import axios from "axios";
+
+const registerUrl = "http://127.0.0.1:8000/api/accounts/dj-rest-auth/registration/";
+const idDuplicateCheckUrl = "http://127.0.0.1:8000/api/accounts/id-duplicate-check/";
+
+
+const onFinishFailed = (errorInfo) => {
+  console.log('Failed:', errorInfo);
+};
+
 
 const UserRegister = () => {
   const [form] = Form.useForm();
+  const [isIdChecked, setIsIdChecked] = useState(false);
+
+  const idValidator = () => (
+    isIdChecked ? Promise.resolve() : Promise.reject(new Error('Check the ID!'))
+  );
+
+  const idDuplicateCheck = async (values) => {
+    console.log("idDuplicateCheck : ", form.getFieldValue('username'));
+    await axios.post(idDuplicateCheckUrl, {
+      username: form.getFieldValue('username'),
+    },
+      { withCredentials: true }
+    )
+      .then((response) => {
+        console.log("loaded response : ", response);
+        setIsIdChecked(true);
+        alert("사용 가능한 ID입니다.");
+      })
+      .catch((error) => {
+        console.log(error.response);
+        setIsIdChecked(false);
+        alert("이미 사용중인 ID입니다.");
+      });
+  }
+
+  const onFinish = async (values) => {
+    console.log('User Input :', values);
+    try {
+      const response = await axios.post(registerUrl, {
+        username: values.username,
+        password1: values.password,
+        password2: values.confirm_password,
+        last_name: values.last_name,
+      },
+        { withCredentials: true }
+      );
+      if (response.status === 201) {
+        console.log("loaded response : ", response);
+        console.log("register success");
+        window.location.href = "/login";
+      } else {
+        console.log("Register failed");
+      }
+    }
+    catch (error) {
+      console.log(error.response);
+      alert("Register Failed");
+    }
+  }
 
   return (
     <div className="user-register">
@@ -33,12 +92,13 @@ const UserRegister = () => {
         <Form
           form={form}
           name="registeration"
-          autoComplete="off"
+          onFinish={onFinish}
+          onFinishFailed={onFinishFailed}
           style={{
             maxWidth: 600,
             margin: "auto",
           }}
-          layout="vertical"
+          autoComplete="off"
         >
 
           <Form.Item
@@ -50,32 +110,37 @@ const UserRegister = () => {
 
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your ID!' }]}
+            rules={[{ validator: idValidator }]}
+            style={{ width: "80%", display: "inline-block" }}
           >
-            <Input placeholder="아이디 (ID)"
-              style={{ width: "80%" }}
+            <Input
+              placeholder="아이디 (ID)"
+              // onChange={handleIdChange}
+              onChange={() => (setIsIdChecked(false))}
             />
-            <ConfigProvider
-              theme={{
-                token: {
-                  colorPrimaryBg: '#121212',
-                  colorPrimary: '#121212',
-                  colorPrimaryHover: '#121212',
-                }
+          </Form.Item>
+
+          <ConfigProvider
+            theme={{
+              token: {
+                colorPrimaryBg: '#121212',
+                colorPrimary: '#121212',
+                colorPrimaryHover: '#121212',
+              }
+            }}
+          >
+            <Button
+              className="id-check-button"
+              type="primary"
+              onClick={idDuplicateCheck}
+              style={{
+                marginLeft: "3.5%",
+                display: "inline-block",
+                borderColor: "rgba(255, 255, 255)"
               }}
             >
-              <Button
-                className="id-check-button"
-                type="primary"
-                htmlType="submit"
-                style={{
-                  marginLeft: "3.5%",
-                  borderColor: "rgba(255, 255, 255)"
-                }}
-              >
-                ID 중복확인</Button>
-            </ConfigProvider>
-          </Form.Item>
+              ID 중복확인</Button>
+          </ConfigProvider>
 
           <Form.Item
             name="password"
@@ -85,7 +150,10 @@ const UserRegister = () => {
               },
             ]}
           >
-            <Input placeholder="비밀번호 (Password)" />
+            <Input
+              placeholder="비밀번호 (Password)"
+              type="password"
+            />
           </Form.Item>
 
           <Form.Item
@@ -105,7 +173,10 @@ const UserRegister = () => {
               }),
             ]}
           >
-            <Input placeholder="비밀번호 확인 (Confirm Password)" />
+            <Input
+              placeholder="비밀번호 확인 (Confirm Password)"
+              type="password"
+            />
           </Form.Item>
 
           <Form.Item>
