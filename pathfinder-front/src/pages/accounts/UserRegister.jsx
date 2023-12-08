@@ -11,7 +11,9 @@ const UserRegister = () => {
         <div className="register-pathfinder-logo" />
         <p className="register-pathfinder-title">Pathfinder</p>
       </div>
-      <p className="register-pathfinder-subtitle">Create New Account</p>
+      <div className="register-pathfinder-sub">
+        <p className="register-pathfinder-subtitle">Create New Account</p>
+      </div>
 
 
       <ConfigProvider theme={{
@@ -19,7 +21,14 @@ const UserRegister = () => {
           colorText: 'rgba(255, 255, 255)',
           colorBorder: 'rgba(228, 112, 58)',
           colorBgContainer: '#121212',
+          colorTextPlaceholder: '#888888'
         },
+        components: {
+          Input: {
+            hoverBorderColor: 'rgba(228, 112, 58)',
+            activeBorderColor: 'rgba(228, 112, 58)',
+          }
+        }
       }}>
         <Form
           form={form}
@@ -34,14 +43,14 @@ const UserRegister = () => {
 
           <Form.Item
             name="last_name"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            rules={[{ required: true, message: 'Please input your name!' }]}
           >
             <Input placeholder="이름 (name)" />
           </Form.Item>
 
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your Username!' }]}
+            rules={[{ required: true, message: 'Please input your ID!' }]}
           >
             <Input placeholder="아이디 (ID)"
               style={{ width: "80%" }}
@@ -91,7 +100,7 @@ const UserRegister = () => {
                   if (!value || getFieldValue('password') === value) {
                     return Promise.resolve();
                   }
-                  return Promise.reject(new Error('The new password that you entered do not match!'));
+                  return Promise.reject(new Error('Check the confirm password!'));
                 },
               }),
             ]}
