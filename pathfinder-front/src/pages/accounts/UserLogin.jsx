@@ -54,12 +54,12 @@ function UserLogin() {
           <Form
             form={form}
             name="normal_login"
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
             style={{
               maxWidth: "28%",
             }}
             initialValues={{ remember: true }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
             <Form.Item
