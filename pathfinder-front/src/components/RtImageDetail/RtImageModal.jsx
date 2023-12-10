@@ -61,18 +61,21 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
     setBoxes(boxes);
   }, []);
 
-  const saveDefects = () => {
-    addedBoxes.forEach(box => {
-      console.log("box : ", box);
-      console.log("rtImage : ", rtImage.pk);
-      axios.post(apiUrl, {
+  const saveDefects = async () => {
+
+    const add_defect_list = addedBoxes.map(box => ({
+      "modified_date": new Date().toISOString(),
+      "defect_type": box['defect_type'],
+      "xmax": box['xmax'],
+      "xmin": box['xmin'],
+      "ymax": box['ymax'],
+      "ymin": box['ymin'],
+    }));
+
+    if (add_defect_list.length !== 0) {
+      await axios.post(apiUrl, {
         "rt_image_id": rtImage.pk,
-        "modified_date": new Date().toISOString(),
-        "defect_type": box['defect_type'],
-        "xmax": box['xmax'],
-        "xmin": box['xmin'],
-        "ymax": box['ymax'],
-        "ymin": box['ymin'],
+        "defect_list": add_defect_list,
       },
         { withCredentials: true }
       ).then((response) => {
@@ -80,18 +83,24 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       }).catch((error) => {
         console.log(error.response);
       });
-    });
+    }
 
-    console.log("deletedBoxes : ", deletedBoxes);
-    deletedBoxes.forEach(boxPk => {
-      axios.delete(apiUrl + boxPk + "/",
+    // const delete_defect_list = deletedBoxes.map(box => ({
+    // "pk": box
+    // }));
+
+    if (deletedBoxes.length !== 0) {
+      await axios.post(apiUrl + "delete/", {
+        "pk_list": deletedBoxes,
+      },
         { withCredentials: true }
       ).then((response) => {
         console.log("response : ", response);
       }).catch((error) => {
         console.log(error.response);
       });
-    });
+    }
+
   };
 
   const getCoordinates = (e) => {
