@@ -35,6 +35,8 @@ function RtImageList() {
         upload_date_before: query.upload_date_before,
         uploader: query.uploader,
         modifier: query.modifier,
+        score_min: query.score_min,
+        score_max: query.score_max,
         expert_check: query.expert_check
       }, withCredentials: true
     })
