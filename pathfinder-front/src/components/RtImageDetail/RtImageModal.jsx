@@ -85,15 +85,12 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       });
     }
 
-    // const delete_defect_list = deletedBoxes.map(box => ({
-    // "pk": box
-    // }));
-
     if (deletedBoxes.length !== 0) {
-      await axios.post(apiUrl + "delete/", {
-        "pk_list": deletedBoxes,
+      console.log("deletedBoxes : ", deletedBoxes);
+      await axios.delete(apiUrl + "bulk_delete/", {
+        "data": { "pk_list": deletedBoxes },
+        withCredentials: true
       },
-        { withCredentials: true }
       ).then((response) => {
         console.log("response : ", response);
       }).catch((error) => {
