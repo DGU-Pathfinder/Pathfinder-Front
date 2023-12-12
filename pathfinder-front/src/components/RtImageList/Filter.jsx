@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { UserOutlined, BarsOutlined } from '@ant-design/icons';
-import { Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
+import { Slider, Checkbox, Input, DatePicker, Dropdown, Space, Divider, Button, theme } from 'antd';
 
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -15,6 +15,8 @@ function Filter({ onQueryChange }) {
     upload_date_befor: null,
     uploader: null,
     modifier: null,
+    score_min: null,
+    score_max: null,
     expert_check: null
   });
   const { RangePicker } = DatePicker;
@@ -26,11 +28,18 @@ function Filter({ onQueryChange }) {
   const [startDateString, setStartDateString] = useState('');
   const [endDateString, setEndDateString] = useState('');
   const [open, setOpen] = useState(false);
+  const [firstNumber, setFirstNumber] = useState();
+  const [secondNumber, setSecondNumber] = useState();
   const { token } = useToken();
   const checkboxOptions = [
     { label: 'Yes', value: 'true' },
     { label: 'No', value: 'false' },
   ];
+
+  const handleSliderChange = (values) => {
+    setFirstNumber(values[0]);
+    setSecondNumber(values[1]);
+  };
 
   const onCalendarChange = (dates, dateStrings) => {
     console.log('Selected Dates:', dates);
@@ -79,6 +88,22 @@ function Filter({ onQueryChange }) {
       key: '4',
       label: (
         <div>
+        <p className='score'>
+          Score Range
+        </p>
+        <Slider
+        range={{
+          draggableTrack: true,
+        }}
+        onAfterChange={handleSliderChange}
+        />      
+        </div>
+      ),
+    },
+    {
+      key: '5',
+      label: (
+        <div>
           <p className='checkbox'>
             Expert Check
           </p>
@@ -110,6 +135,8 @@ function Filter({ onQueryChange }) {
       upload_date_before: endDateString,
       uploader: uploader,
       modifier: modifier,
+      score_min: firstNumber,
+      score_max: secondNumber,
       expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
     })
     onQueryChange(localQuery);
