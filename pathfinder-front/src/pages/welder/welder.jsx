@@ -9,12 +9,15 @@ const apiUrl = `http://127.0.0.1:8000/api/welders/`;
 const { Search } = Input;
 
 const Welder = () => {
-  const [welderName, setWelderName] = useState("");
+  const [welderName, setWelderName] = useState(null);
   const [welder, setWelder] = useState(null);
   const [defectCount, setDefectCount] = useState(null);
 
   useEffect(() => {
-    getWelder();
+    if (welderName === null)
+      return;
+    else
+      getWelder();
   }, [welderName]);
 
   const onSearch = (value) => {
@@ -22,22 +25,29 @@ const Welder = () => {
     if (value === "")
       return;
     setWelderName(value);
-    getWelder();
   };
 
-  const getWelder = () => {
+  const getWelder = async () => {
     console.log("URL : ", apiUrl + welderName + '/');
-    axios.get(apiUrl + `${encodeURIComponent(welderName)}/`,
+    await axios.get(apiUrl + `${encodeURIComponent(welderName)}/`,
       { withCredentials: true }
     ).then((response) => {
       const { data } = response;
+
       console.log("loaded res : ", response);
       console.log("welder data : ", data);
+
       setWelder(data);
       setDefectCount(data["slag_number"] + data["porosity_number"] + data["others_number"]);
+
       console.log("defectCount : ", defectCount);
     }).catch((error) => {
       console.log(error.response);
+
+      if (error.response.status === 404)
+        alert("해당 용접자가 존재하지 않습니다.");
+      else
+        alert("에러가 발생했습니다.");
     });
   };
 
@@ -50,7 +60,7 @@ const Welder = () => {
         prefix={<UserOutlined />}
         enterButton
       />
-      {welderName === "" ? (
+      {welderName === null ? (
         <div className="welderPage">
           <TrySearch />
         </div>
