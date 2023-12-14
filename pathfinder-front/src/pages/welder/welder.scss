@@ -4,6 +4,22 @@
   width: 20%;
 }
 
+.welderNothing {
+  margin-top: 3%;
+  margin-left: 72%;
+  width: 20%;
+
+}
+
+.ant-input-search-button {
+  background-color: rgba(228, 122, 58);
+  border-color: rgba(228, 122, 58);
+}
+
+.ant-input-search-button:hover {
+  background-color: rgba(228, 122, 58) !important;
+}
+
 .welderDetail {
   justify-content: center;
   display: flex;
@@ -35,4 +51,11 @@
 .welderDefectDetail {
   // display: inline-block;
   margin-left: 5%;
+}
+
+.cardTitle {
+  margin-top: 0px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
 }
