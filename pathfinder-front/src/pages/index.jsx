@@ -6,6 +6,7 @@ import UserLogin from "./accounts/UserLogin";
 import RtImageList from "./RtImageList/RtImageList";
 import UploadImage from "./UploadImage/UploadImage";
 import RtImageDetail from "./RtImageDetail/RtImageDetail";
+import Welder from "./welder/welder";
 
 function Root() {
   return (
@@ -14,6 +15,7 @@ function Root() {
         <Route path="/" element={<RtImageList />} />
         <Route path="/rt-image/:id" element={<RtImageDetail />} />
         <Route path="/upload-image" element={<UploadImage />} />
+        <Route path="/welder" element={<Welder />} />
         <Route path="/registration" element={<UserRegister />} />
         <Route path="/login" element={<UserLogin />} />
       </Routes>

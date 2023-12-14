@@ -1,0 +1,38 @@
+.welderInput {
+  margin-top: 3%;
+  margin-left: 72%;
+  width: 20%;
+}
+
+.welderDetail {
+  justify-content: center;
+  display: flex;
+  margin-top: 3%;
+}
+
+.welderImageInfo {
+  // display: inline-block;
+}
+
+.welderImage {
+  display: block;
+  height: 300px;
+  width: 230px;
+  background-image: url('../../assets/png/default_image.png');
+  background-size: cover;
+}
+
+.welderName {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.welderSuccessDetail {
+  // display: inline-block;
+  margin-left: 5%;
+}
+
+.welderDefectDetail {
+  // display: inline-block;
+  margin-left: 5%;
+}
