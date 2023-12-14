@@ -29,8 +29,8 @@ const menuItems = [
   },
   {
     label: (
-      <a href="/evaluation">
-        평가한 항목
+      <a href="/welder">
+        용접자 검색
       </a>
     ),
     key: 'evaluation',
@@ -58,7 +58,6 @@ const logoutApi = () => {
       console.log(error);
     });
 };
-
 
 function AppHeader() {
   const itemStyle = { marginRight: '10px' };
