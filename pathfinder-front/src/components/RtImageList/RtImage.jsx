@@ -78,7 +78,7 @@ function getBorderColor(defectType) {
 }
 
 function RtImage({ rtImage }) {
-  const { image, image_name, ai_model, expert } = rtImage;
+  const { image, image_name, ai_model, expert, uploader_name, upload_date } = rtImage;
   const defects = ai_model?.ai_defect_set;
   const ai_model_data = makeDataForTable(ai_model?.ai_defect_set || "no ai data", "ai_defect_set", "AI");
   const expert_data = makeDataForTable(expert?.expert_defect_set || "no expert data", "expert_defect_set", "Expert");
@@ -158,6 +158,9 @@ function RtImage({ rtImage }) {
         fontWeight: "bold",
       }}>
         {image_name}
+      </p>
+      <p>
+      {' 업로더 : '+uploader_name}{' 날짜 : '+upload_date.slice(0,10)}
       </p>
 
       <ConfigProvider
