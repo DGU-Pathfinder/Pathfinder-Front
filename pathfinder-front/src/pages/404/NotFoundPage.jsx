@@ -1,8 +1,7 @@
 import React from 'react';
-import { SmileFilled } from '@ant-design/icons';
 import { ConfigProvider, Result } from 'antd';
 
-const TrySearch = () => (
+const NotFoundPage = () => (
   <ConfigProvider theme={{
     token: {
       colorText: 'white'
@@ -10,14 +9,14 @@ const TrySearch = () => (
   }}
   >
     <Result
-      icon={<SmileFilled style={{ color: "rgba(228, 122, 58)" }} />}
-      title="찾고 싶은 용접자를 검색해보세요!"
+      status="warning"
+      title="There are some problems with your operation."
       style={{
         fontWeight: "bold",
         marginTop: "10%",
         marginBottom: "10%",
       }}
     />
-  </ConfigProvider >
+  </ConfigProvider>
 );
-export default TrySearch;
+export default NotFoundPage;
