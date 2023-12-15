@@ -5,7 +5,8 @@ import { ConfigProvider, Result } from 'antd';
 const TrySearch = () => (
   <ConfigProvider theme={{
     token: {
-      colorText: 'white'
+      colorText: 'white',
+      fontSize: '40px'
     },
   }}
   >
@@ -26,4 +27,5 @@ const TrySearch = () => (
     />
   </ConfigProvider >
 );
+
 export default TrySearch;
