@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { Input, Card, Statistic, ConfigProvider } from 'antd';
-import { UserOutlined, ArrowUpOutlined, CheckCircleOutlined, CloseCircleOutlined, BgColorsOutlined, DotChartOutlined, QuestionCircleOutlined } from '@ant-design/icons';
+import {
+  UserOutlined,
+  ArrowUpOutlined,
+  CheckCircleOutlined,
+  BgColorsOutlined,
+  DotChartOutlined,
+  QuestionCircleOutlined
+} from '@ant-design/icons';
 import './welder.scss';
 import axios from 'axios';
 import TrySearch from "./TrySearch";
