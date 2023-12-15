@@ -10,7 +10,13 @@ const TrySearch = () => (
   }}
   >
     <Result
-      icon={<SmileFilled style={{ color: "rgba(228, 122, 58)" }} />}
+      icon={<SmileFilled
+        style={{
+          color: "rgba(228, 122, 58)",
+          fontSize: "100px"
+        }}
+      />
+      }
       title="찾고 싶은 용접자를 검색해보세요!"
       style={{
         fontWeight: "bold",
