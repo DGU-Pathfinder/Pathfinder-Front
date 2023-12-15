@@ -9,6 +9,7 @@ import axios from "axios";
 const RtImageModalContext = createContext();
 let id_cnt = 0;
 const apiUrl = "http://127.0.0.1:8000/api/expert-defects/"
+const expertApiUrl = "http://127.0.0.1:8000/api/experts/"
 
 export const useRtModal = () => useContext(RtImageModalContext);
 
@@ -96,20 +97,19 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       }).catch((error) => {
         console.log(error.response);
       });
+    } else if (boxes.length === 0) {
+      if (rtImage?.expert === null) {
+        await axios.post(expertApiUrl, {
+          "rt_image": rtImage.pk,
+        },
+          { withCredentials: true }
+        ).then((response) => {
+          console.log("response : ", response);
+        }).catch((error) => {
+          console.log(error.response);
+        });
+      }
     }
-    // else if (boxes.length === 0) {
-    //   console.log("boxes : ", boxes);
-    //   await axios.delete(apiUrl + "bulk_delete/", {
-    //     "data": { "pk_list": [rtImage.expert.pk] },
-    //     withCredentials: true
-    //   },
-    //   ).then((response) => {
-    //     console.log("response : ", response);
-    //   }).catch((error) => {
-    //     console.log(error.response);
-    //   });
-    // }
-
   };
 
   const getCoordinates = (e) => {
