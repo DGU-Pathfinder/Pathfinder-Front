@@ -5,12 +5,19 @@ import { ConfigProvider, Result } from 'antd';
 const TrySearch = () => (
   <ConfigProvider theme={{
     token: {
-      colorText: 'white'
+      colorText: 'white',
+      fontSize: '40px'
     },
   }}
   >
     <Result
-      icon={<SmileFilled style={{ color: "rgba(228, 122, 58)" }} />}
+      icon={<SmileFilled
+        style={{
+          color: "rgba(228, 122, 58)",
+          fontSize: "100px"
+        }}
+      />
+      }
       title="찾고 싶은 용접자를 검색해보세요!"
       style={{
         fontWeight: "bold",
@@ -20,4 +27,5 @@ const TrySearch = () => (
     />
   </ConfigProvider >
 );
+
 export default TrySearch;

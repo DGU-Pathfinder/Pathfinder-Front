@@ -97,6 +97,18 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         console.log(error.response);
       });
     }
+    // else if (boxes.length === 0) {
+    //   console.log("boxes : ", boxes);
+    //   await axios.delete(apiUrl + "bulk_delete/", {
+    //     "data": { "pk_list": [rtImage.expert.pk] },
+    //     withCredentials: true
+    //   },
+    //   ).then((response) => {
+    //     console.log("response : ", response);
+    //   }).catch((error) => {
+    //     console.log(error.response);
+    //   });
+    // }
 
   };
 
