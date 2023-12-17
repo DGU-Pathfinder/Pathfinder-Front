@@ -226,7 +226,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
           src={image}
           alt={image_name}
           style={{
-            display: "block", margin: "auto",
+            display: "block", margin: "0",
           }}
         />
         {boxes.map((box, index) => {
