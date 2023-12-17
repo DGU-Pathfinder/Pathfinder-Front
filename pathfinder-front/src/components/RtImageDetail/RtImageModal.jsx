@@ -81,8 +81,10 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         { withCredentials: true }
       ).then((response) => {
         console.log("response : ", response);
+        setAddedBoxes([]);
       }).catch((error) => {
         console.log(error.response);
+        alert("에러가 발생했습니다.");
       });
     }
 
@@ -94,8 +96,10 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
       },
       ).then((response) => {
         console.log("response : ", response);
+        setDeletedBoxes([]);
       }).catch((error) => {
         console.log(error.response);
+        alert("에러가 발생했습니다.");
       });
     } else if (boxes.length === 0) {
       if (rtImage?.expert === null) {
@@ -107,6 +111,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
           console.log("response : ", response);
         }).catch((error) => {
           console.log(error.response);
+          alert("에러가 발생했습니다.");
         });
       }
     }
