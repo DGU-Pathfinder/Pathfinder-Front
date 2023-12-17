@@ -43,19 +43,23 @@ function RtImageDetail() {
 
   const aiDefects = rtImage?.ai_model?.ai_defect_set || "no ai data"
   const expertDefects = rtImage?.expert?.expert_defect_set || "no expert data";
-  // console.log("aiDefects : ", aiDefects);
 
   return (
     <div className='rt-image-detail-container'>
-      <h1
+      <Divider
+        style={{
+          borderColor: "rgba(228, 122, 58)",
+          marginTop: "2%",
+          marginBottom: "0",
+        }}
+      ><h1
         style={{
           textAlign: "center",
           color: "rgba(255, 255, 255)",
-          marginBottom: "0px",
         }}
       >
-        {rtImage.image_name}
-      </h1>
+          {rtImage.image_name}
+        </h1></Divider>
       <Row align="middle">
         <Col span={18}>
           <div className='rt-image-ai-detail'>
@@ -122,6 +126,13 @@ function RtImageDetail() {
           </div>
         </Col>
       </Row>
+      <Divider
+        style={{
+          borderColor: "rgba(228, 122, 58)",
+          margin: "0px",
+          marginBottom: "2%",
+        }}
+      />
     </div>
   );
 }
