@@ -46,48 +46,20 @@ function RtImageDetail() {
 
   return (
     <div className='rt-image-detail-container'>
-      {/* <Divider
-        style={{
-          borderColor: "rgba(228, 122, 58)",
-          marginTop: "2%",
-          marginBottom: "0",
-          
-        }}
-      /> */}
-      {/* <h1
-        style={{
-          textAlign: "center",
-          color: "rgba(255, 255, 255)",
-          marginTop: "2%",
-          marginBottom: "0px",
-        }}
-      >
-        {rtImage.image_name}
-      </h1> */}
       <Divider
         style={{
           borderColor: "rgba(228, 122, 58)",
           marginTop: "2%",
           marginBottom: "0",
-          // height: "50px",
         }}
       ><h1
         style={{
           textAlign: "center",
           color: "rgba(255, 255, 255)",
-          // marginTop: "2%",
-          // marginBottom: "0px",
         }}
       >
           {rtImage.image_name}
         </h1></Divider>
-      {/* <Divider
-        style={{
-          borderColor: "rgba(228, 122, 58)",
-          marginTop: "2%",
-          marginBottom: "0",
-        }}
-      /> */}
       <Row align="middle">
         <Col span={18}>
           <div className='rt-image-ai-detail'>
