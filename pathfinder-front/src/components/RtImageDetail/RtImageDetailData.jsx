@@ -92,7 +92,7 @@ function RtImageDetailData({ rtImage, defects }) {
 
           return (
             <>
-              <p style={score_style}>{box.defect_type} : {box.score.toFixed(2)}</p>
+              <p style={score_style}>{box.defect_type} {box.score && ': ' + box.score.toFixed(2)}</p>
               <div key={index} style={box_style} />
             </>
           );

@@ -254,7 +254,12 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
 
           return (
             <>
-              <p style={score_style}>{box.defect_type} : {box.score.toFixed(2)}</p>
+              <p
+                key={index}
+                style={score_style}
+              >
+                {box.defect_type} {box?.score && ': ' + box.score.toFixed(2)}
+              </p>
               <div
                 key={index}
                 style={box_style}
