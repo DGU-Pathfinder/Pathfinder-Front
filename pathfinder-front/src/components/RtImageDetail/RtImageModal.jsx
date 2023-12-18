@@ -226,7 +226,7 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
           src={image}
           alt={image_name}
           style={{
-            display: "block", margin: "auto",
+            display: "block", margin: "0",
           }}
         />
         {boxes.map((box, index) => {
@@ -242,12 +242,25 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
             width: box.xmax - box.xmin,
             height: box.ymax - box.ymin,
           }
+
+          const score_style = {
+            position: 'absolute',
+            color: getBorderColor(box.defect_type),
+            left: box.xmin,
+            top: box.ymin - (box.ymax - box.ymin) / 2 - 3,
+            width: '130px',
+            margin: 0,
+          }
+
           return (
-            <div
-              key={index}
-              style={box_style}
-              onClick={() => deleteBox(box.id)}
-            />
+            <>
+              <p style={score_style}>{box.defect_type} : {box.score.toFixed(2)}</p>
+              <div
+                key={index}
+                style={box_style}
+                onClick={() => deleteBox(box.id)}
+              />
+            </>
           );
         }
         )}
