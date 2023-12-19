@@ -80,8 +80,21 @@ function RtImageDetailData({ rtImage, defects }) {
             height: adjustedBox.height,
             border: border_style,
           }
+
+          const score_style = {
+            position: 'absolute',
+            color: getBorderColor(box.defect_type),
+            left: adjustedBox.left,
+            top: adjustedBox.top - adjustedBox.height / 2 - 10,
+            width: '130px',
+            margin: 0,
+          }
+
           return (
-            <div key={index} style={box_style} />
+            <>
+              <p style={score_style}>{box.defect_type} {box.score && ': ' + box.score.toFixed(2)}</p>
+              <div key={index} style={box_style} />
+            </>
           );
         })}
       </div>
