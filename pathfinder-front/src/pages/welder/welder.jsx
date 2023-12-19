@@ -1,5 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Card, Statistic, ConfigProvider, Divider } from 'antd';
+import {
+  Input,
+  Card,
+  Statistic,
+  ConfigProvider,
+  Divider
+} from 'antd';
 import {
   UserOutlined,
   ArrowUpOutlined,
