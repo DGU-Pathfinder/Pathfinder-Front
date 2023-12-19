@@ -26,8 +26,13 @@
   margin-top: 3%;
 }
 
+.welderDefectDetailCard {
+  width: 40%;
+}
+
 .welderImageInfo {
-  // display: inline-block;
+  display: block;
+  margin: auto 0 auto 5%;
 }
 
 .welderImage {
@@ -44,18 +49,39 @@
 }
 
 .welderSuccessDetail {
-  // display: inline-block;
-  margin-left: 5%;
+  margin-bottom: 2%;
 }
 
 .welderDefectDetail {
-  // display: inline-block;
-  margin-left: 5%;
+  margin-bottom: 2%;
 }
 
 .cardTitle {
   margin-top: 0px;
   font-size: 20px;
   font-weight: bold;
+  text-align: left;
+}
+
+.rtCard {
+  display: flex;
+  justify-content: center;
+}
+
+.ant-statistic {
+  display: inline-block;
+}
+
+.ant-statistic-title {
+  display: inline-block;
+  color: white !important;
+  margin-right: 1%;
+}
+
+.ant-statistic-content {
+  display: inline-block;
+}
+
+.statistic {
   text-align: center;
 }
