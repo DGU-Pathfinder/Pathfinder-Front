@@ -135,8 +135,8 @@ function Filter({ onQueryChange }) {
       upload_date_before: endDateString,
       uploader: uploader,
       modifier: modifier,
-      score_min: firstNumber === 0 && secondNumber === 0? null : firstNumber, 
-      score_max: firstNumber === 0 && secondNumber === 0? null : secondNumber ,
+      score_min: firstNumber === 0 && secondNumber === 0? null : firstNumber/100, 
+      score_max: firstNumber === 0 && secondNumber === 0? null : secondNumber/100 ,
       expert_check: Expertcheck.length === 2 ? null : Expertcheck[0]
     })
     onQueryChange(localQuery);
