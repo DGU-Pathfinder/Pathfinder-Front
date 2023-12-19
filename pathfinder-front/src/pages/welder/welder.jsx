@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Input, Card, Statistic, ConfigProvider } from 'antd';
+import { Input, Card, Statistic, ConfigProvider, Divider } from 'antd';
 import {
   UserOutlined,
   ArrowUpOutlined,
@@ -73,8 +73,15 @@ const Welder = () => {
         </div>
       ) : (
         <div className="welderPage">
+          <Divider
+            style={{
+              borderColor: "rgba(228, 122, 58)",
+              marginTop: "3%",
+              marginBottom: "8%",
+            }}
+          />
           <div className="welderDetail">
-            <div className="welderImageInfo">
+            {/* <div className="welderImageInfo">
               <div className="welderImage"></div>
               <p
                 className="welderName"
@@ -85,7 +92,7 @@ const Welder = () => {
                 }}
               >
                 {welder && welder.name}</p>
-            </div>
+            </div> */}
             <div className="welderSuccessDetail">
               <ConfigProvider theme={{
                 token: {
@@ -187,7 +194,26 @@ const Welder = () => {
                 />
               </Card>
             </div>
+            {/* <div className="welderImageInfo">
+              <div className="welderImage"></div>
+              <p
+                className="welderName"
+                style={{
+                  textAlign: "center",
+                  color: "rgba(255, 255, 255)",
+                  marginBottom: "0px",
+                }}
+              >
+                {welder && welder.name}</p>
+            </div> */}
           </div>
+          <Divider
+            style={{
+              borderColor: "rgba(228, 122, 58)",
+              marginTop: "8%",
+              marginBottom: "2%",
+            }}
+          />
         </div>
       )}
     </>
