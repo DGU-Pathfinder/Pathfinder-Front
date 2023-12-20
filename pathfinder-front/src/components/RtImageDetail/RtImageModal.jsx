@@ -1,9 +1,9 @@
 import React, { createContext, useState, useContext, useRef, useEffect, useCallback } from "react";
 import Modal from "react-modal";
-import { Button, FloatButton } from "antd";
-import "./RtImageModal.scss";
+import { FloatButton } from "antd";
 import { PlusOutlined, DeleteOutlined, EyeOutlined, SaveOutlined } from "@ant-design/icons";
 import axios from "axios";
+import "./RtImageModal.scss";
 
 
 const RtImageModalContext = createContext();
@@ -203,21 +203,6 @@ function RtImageModal({ isOpen, onRequestClose, rtImage }) {
         },
       }}
     >
-      {/* <div className="rt-image-modal-header">
-        <Button
-          className="rt-image-modal-save-button"
-          onClick={onRequestClose}
-          style={{
-            display: "block",
-            position: "fixed",
-            width: "10%",
-            // marginTop: "1%",
-            marginLeft: "80%",
-          }}
-        >
-          save and close
-        </Button>
-      </div> */}
       <div className="rt-image-modal-body"
         style={{ position: 'relative' }}>
         <img
