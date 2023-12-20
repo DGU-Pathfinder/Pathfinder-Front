@@ -19,9 +19,17 @@
   text-align: center !important;
 }
 
+.defect-card-container {
+  width: 60%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 10%;
+}
+
 .defect-card {
   background-color: #121212;
-  width: 55%;
-  padding: 15%;
   margin: auto;
 }
