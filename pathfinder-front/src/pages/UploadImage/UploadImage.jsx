@@ -1,6 +1,6 @@
 import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import { Row, Col, Card, Statistic, ConfigProvider, message, Upload } from 'antd';
+import { Card, Statistic, ConfigProvider, message, Upload } from 'antd';
 import './UploadImage.scss';
 
 
