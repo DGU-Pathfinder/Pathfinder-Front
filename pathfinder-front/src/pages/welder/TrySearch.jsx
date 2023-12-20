@@ -18,11 +18,11 @@ const TrySearch = () => (
         }}
       />
       }
-      title="찾고 싶은 용접자를 검색해보세요!"
+      title="찾고 싶은 용접사를 검색해보세요!"
       style={{
         fontWeight: "bold",
-        marginTop: "10%",
-        marginBottom: "10%",
+        marginTop: "7%",
+        marginBottom: "7%",
       }}
     />
   </ConfigProvider >
