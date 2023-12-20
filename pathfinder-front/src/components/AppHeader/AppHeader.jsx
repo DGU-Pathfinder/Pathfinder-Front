@@ -30,7 +30,7 @@ const menuItems = [
   {
     label: (
       <a href="/welder">
-        용접자 검색
+        용접사 검색
       </a>
     ),
     key: 'evaluation',
