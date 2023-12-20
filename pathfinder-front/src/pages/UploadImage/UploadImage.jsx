@@ -28,7 +28,7 @@ const props = {
 
 const UploadImage = () => (
 
-  <div>
+  <>
     <ConfigProvider
       theme={{
         token: { colorText: 'white', },
@@ -56,6 +56,7 @@ const UploadImage = () => (
         </div>
       </div>
     </ConfigProvider>
+
     <Row gutter={0} justify="center">
       <Col span={8}>
         <Card bordered={true} className="defect-card">
@@ -108,11 +109,7 @@ const UploadImage = () => (
         </Card>
       </Col>
     </Row>
-  </div>
-
-
-
-
+  </>
 )
 
 export default UploadImage;
