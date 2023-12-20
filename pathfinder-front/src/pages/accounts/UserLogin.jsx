@@ -50,6 +50,12 @@ function UserLogin() {
             colorBorder: 'rgba(228, 112, 58)',
             colorBgContainer: '#121212',
           },
+          components: {
+            Input: {
+              hoverBorderColor: 'rgba(228, 112, 58)',
+              activeBorderColor: 'rgba(228, 112, 58)',
+            }
+          }
         }}>
           <Form
             form={form}
