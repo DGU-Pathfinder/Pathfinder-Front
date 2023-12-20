@@ -1,6 +1,7 @@
 import React from "react";
 import { Layout, Menu, Button } from "antd";
 import { PictureOutlined, AimOutlined, UserOutlined } from '@ant-design/icons';
+import { useLocation } from "react-router-dom";
 import axios from "axios";
 import "./AppHeader.scss";
 
@@ -61,6 +62,10 @@ const logoutApi = () => {
 
 function AppHeader() {
   const itemStyle = { marginRight: '10px' };
+  const location = useLocation();
+
+  const isLoginPage = location.pathname === '/login';
+
   return (
     <Header
       className="main-header"
@@ -93,8 +98,16 @@ function AppHeader() {
           width: '40%',
         }}
       />
-      <Button className="logout-button" type="link" onClick={logoutApi}>
-        LOGOUT</Button>
+      {isLoginPage &&
+        <Button className="logout-button" type="link">
+          LOGIN
+        </Button>
+      }
+      {!isLoginPage &&
+        <Button className="logout-button" type="link" onClick={logoutApi}>
+          LOGOUT
+        </Button>
+      }
     </Header>
   )
 }
