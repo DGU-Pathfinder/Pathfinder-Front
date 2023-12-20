@@ -1,6 +1,6 @@
 import React from 'react';
 import { InboxOutlined } from '@ant-design/icons';
-import { ConfigProvider, message, Upload } from 'antd';
+import { Row, Col,Card, Statistic,ConfigProvider, message, Upload } from 'antd';
 import './UploadImage.scss';
 
 
@@ -28,6 +28,7 @@ const props = {
 
 const UploadImage = () => (
 
+  <div>
   <ConfigProvider
     theme={{
       token: { colorText: 'white', },
@@ -55,6 +56,63 @@ const UploadImage = () => (
       </div>
     </div>
   </ConfigProvider>
+  <Row gutter={0} justify="center">
+    <Col span={8}>
+      <Card bordered={true} className="defect-card">
+        <p className="cardTitle">Porosity</p>         
+        <div className="statistic">
+        <Statistic
+          title="Precision"
+          value={83}        
+          valueStyle={{ color: 'blue', }}
+          suffix="%"
+        />
+        <Statistic
+          title="Recall"
+          value={74}        
+          valueStyle={{ color: 'blue', }}
+          suffix="%"
+        />
+        <Statistic
+          title="F1 score"
+          value={78}        
+          valueStyle={{ color: 'blue', }}
+          suffix="%"
+        />
+        </div>
+      </Card>
+      </Col>
+      <Col span={8}>
+      <Card bordered={true} className="defect-card">
+      <p className="cardTitle">Slag</p>
+      <div className="statistic">
+        <Statistic
+          title="Precision"
+          value={93}        
+          valueStyle={{ color: 'red', }}
+          suffix="%"
+        />
+        <Statistic
+          title="Recall"
+          value={85}        
+          valueStyle={{ color: 'red', }}
+          suffix="%"
+        />
+        <Statistic
+          title="F1 score"
+          value={78}        
+          valueStyle={{ color: 'red', }}
+          suffix="%"
+        />
+        </div>
+      </Card>
+      </Col>
+    </Row>
+  </div>
+
+
+  
+  
 )
 
 export default UploadImage;

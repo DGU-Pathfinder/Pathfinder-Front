@@ -1,5 +1,6 @@
 import React from "react";
 import { ConfigProvider, Table } from "antd";
+import { UserOutlined, CalendarOutlined } from '@ant-design/icons';
 import { useState, useEffect, useRef } from "react";
 import "./RtImage.scss";
 
@@ -159,8 +160,18 @@ function RtImage({ rtImage }) {
       }}>
         {image_name}
       </p>
-      <p>
-      {' 업로더 : '+uploader_name}{' 날짜 : '+upload_date.slice(0,10)}
+      <p
+        style={{
+          display: "inline-block",
+          marginRight: "11%" 
+        }}
+      >
+          <UserOutlined />
+          {uploader_name+'  '}
+      </p>
+      <p style={{display: "inline-block"}}>
+        <CalendarOutlined />
+        {upload_date.slice(0,10)}
       </p>
 
       <ConfigProvider
