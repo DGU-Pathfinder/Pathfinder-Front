@@ -5,7 +5,6 @@
 }
 
 .body-container {
-  background-color: rgb(18, 18, 18);
   padding: 5%;
 }
 
@@ -17,15 +16,20 @@
 
 .cardTitle {
   color: white;
+  text-align: center !important;
+}
+
+.defect-card-container {
+  width: 60%;
+  height: 30%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2%;
+  margin-bottom: 10%;
 }
 
 .defect-card {
-  background-color: black;
-  width: 55%;
-  padding: 15%;
+  background-color: #121212;
   margin: auto;
-
 }
-
-
-
