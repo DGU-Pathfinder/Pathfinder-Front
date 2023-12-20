@@ -68,7 +68,7 @@ const Welder = () => {
     <>
       <Search
         className="welderInput"
-        placeholder="Welder"
+        placeholder="용접사"
         onSearch={onSearch}
         prefix={<UserOutlined />}
         enterButton
@@ -83,7 +83,7 @@ const Welder = () => {
             style={{
               borderColor: "rgba(228, 122, 58)",
               marginTop: "3%",
-              marginBottom: "8%",
+              // marginBottom: "8%",
             }}
           />
           <div className="welderDetail">
@@ -219,8 +219,8 @@ const Welder = () => {
           <Divider
             style={{
               borderColor: "rgba(228, 122, 58)",
-              marginTop: "8%",
-              marginBottom: "2%",
+              marginTop: "2%",
+              marginBottom: "1%",
             }}
           />
         </div >
