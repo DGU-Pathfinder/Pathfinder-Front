@@ -28,8 +28,8 @@ function Filter({ onQueryChange }) {
   const [startDateString, setStartDateString] = useState('');
   const [endDateString, setEndDateString] = useState('');
   const [open, setOpen] = useState(false);
-  const [firstNumber, setFirstNumber] = useState();
-  const [secondNumber, setSecondNumber] = useState();
+  const [firstNumber, setFirstNumber] = useState(0);
+  const [secondNumber, setSecondNumber] = useState(0);
   const { token } = useToken();
   const checkboxOptions = [
     { label: 'Yes', value: 'true' },
